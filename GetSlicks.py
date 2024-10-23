@@ -1,8 +1,12 @@
+from rasterio.plot import show
 from rasterio.windows import Window
 from rasterio.mask import mask as rioMask
+from os.path import expanduser
+from matplotlib import pyplot as plt
+from rasterio import plot as rasterplot
+from shapely.geometry import MultiPolygon, Polygon
 import json
 import rasterio.mask
-from os.path import expanduser
 import rasterio
 import geopandas as gpd
 import pandas as pd
@@ -11,10 +15,6 @@ import csv
 import os
 import re
 import importlib
-from matplotlib import pyplot as plt
-from rasterio import plot as rasterplot
-from shapely.geometry import MultiPolygon, Polygon
-
 import FunFeatShape as FeatShp
 importlib.reload(FeatShp)
 
@@ -22,7 +22,6 @@ importlib.reload(FeatShp)
 home = expanduser("~")
 
 pd.set_option("display.max_columns", 1000)
-CRS = 3857  # TODO: Check!   # 3857 (meters) | 4326 (degress, WGS84)
 
 dir_img = "./img"
 os.makedirs(dir_img, exist_ok=True)
@@ -53,10 +52,6 @@ assert len(fnames_img8) == len(fnames_img16)
 # Geométricas: area, perim, complexity_measure, spreading, shape_factor, hu_moment, circularity, ratio
 with open('stats.csv', 'w') as f1:
     writer = csv.writer(f1, delimiter=";", lineterminator='\n')
-    # _ = writer.writerow(['IMG_NAME', 'ID_VECT', 'ID_POLYG', 'CENTR_KM_LAT', 'CENTR_KM_LON',
-    #                      'SHP_AREA_KM2', 'SHP_PERIM_KM', 'SHP_COMPLEX_MEAS', 'SHP_SPREAD', 'SHP_FACT',
-    #                      'SHP_HU_MOM1', 'SHP_HU_MOM2', 'SHP_HU_MOM3', 'SHP_HU_MOM4', 'SHP_HU_MOM5', 'SHP_HU_MOM6', 'SHP_HU_MOM7',
-    #                      'SHP_CIRCUL', 'SHP_PER_AREA_RATIO'])
 
     idx_img = 0
     fname_img = fnames_img16[idx_img]
@@ -68,24 +63,39 @@ with open('stats.csv', 'w') as f1:
         # Pega o ID da imagem do nome, para poder pegar seus vetores
         id_img = int(bname.split(" ")[0])
 
-        # Captura todas as geometrias referentes à imagem
-        # Vetores registrados na imagem sendo analisada
-        vets_img = vetores[vetores['Id'] == id_img]
-        vets_img.reset_index(inplace=True)
-
-        # tiff = rioxarray.open_rasterio(fname_img, masked=True, chunks=True)
         # Abre o raster (o TIFF)
-        tiff = rasterio.open(fname_img, masked=True, chunks=True)
-        # tiff.crs - TODO: Check!
-        tiff_extent = [tiff.bounds[0], tiff.bounds[2],
-                       tiff.bounds[1], tiff.bounds[3]]
+        # tiff = rioxarray.open_rasterio(fname_img, masked=True, chunks=True)
+        tiff16 = rasterio.open(fname_img, masked=True, chunks=True)
 
-        # Plota uma imagem com todos os polígonos da imagem e uma imagem para cada polígono da imagem
-        # vets_img.plot();
+        # Captura todas as geometrias (polígonos) referentes à imagem
+        gdf_img_mpolys = vetores[vetores['Id'] == id_img]
+        gdf_img_mpolys.reset_index(inplace=True)
+
+        # Converte todos os mutipolígonos da imagem em polígonos individuais
+        # Os polígonos permanecem polígonos
+        # index_parts=True cria um índice composto (entrada original + partes explodidas)
+        gdf_img_polys = gdf_img_mpolys.explode(index_parts=True)
+
+        # Percorre a lista dos polígonos individuais da imagem
+        idx_poly = 0
+        gdf_poly = gdf_img_polys.iloc[[idx_poly]]
+        for idx_poly, gdf_poly in enumerate(gdf_img_polys):
+
+            # Prefix for each row of the CSV
+            dict_head = {'ID_IMG': int(gdf_poly.Id.iloc[0]), 'IMG_NAME': bname, 'ID_VECT': gdf_poly.ID_POLY.iloc[0],
+                         'ID_POLYG': int(gdf_poly.index[0][0])}
+
+            # Suffix for each row of the CSV
+            dict_tail = {"AREA_KM_DS": float(gdf_poly.AREA_KM.iloc[0]), "PERIM_KM_DS": float(gdf_poly.PERIM_KM.iloc[0]),
+                         "SATELITE": gdf_poly.SATELITE.iloc[0], "BEAM_MODE": gdf_poly.BEAM_MODE.iloc[0],
+                         "CLASSE": gdf_poly.CLASSE.iloc[0], "SUBCLASSE": gdf_poly.SUBCLASSE.iloc[0]}
+
+          # Plota uma imagem com todos os polígonos da imagem e uma imagem para cada polígono da imagem
+            # vets_img.plot();
         idx_vet = 0
-        for idx_vet in range(len(vets_img)):
+        for idx_vet in range(len(gdf_img_mpolys)):
             # Captura polígono (pode ser multipolígono mesmo sendo polígono único)
-            multipol_df = vets_img.iloc[[idx_vet]]
+            multipol_df = gdf_img_mpolys.iloc[[idx_vet]]
             # Transforma cada multipolígono lista de polígonos
             pol_df = multipol_df.explode(index_parts=True)
             idx_pol = 0
@@ -108,6 +118,9 @@ with open('stats.csv', 'w') as f1:
                 # Escreve a linha
                 _ = writer.writerow(line.values())
 
+# tiff.shape
+show(tiff16.read(), transform=tiff16.transform, cmap='gray')
+
 
 # Plotting
 pol_deg.geometry.plot(facecolor='w', edgecolor='red')
@@ -125,7 +138,7 @@ f, ax = plt.subplots()
 #                 ax=ax,
 #                 )
 
-data, _ = rasterio.mask.mask(tiff, shapes=seg, crop=True)
+data, _ = rasterio.mask.mask(tiff16, shapes=seg, crop=True)
 rasterplot.show(data, ax=ax)
 # rasterplot.show(pol_deg, ax=ax)
 # plot shapefiles
@@ -148,7 +161,7 @@ plt.show()
 
 # ================================================================
 # Open the raster data using rasterio
-data, _ = rasterio.mask.mask(tiff, shapes=pol_deg.geometry, crop=True)
+data, _ = rasterio.mask.mask(tiff16, shapes=pol_deg.geometry, crop=True)
 
 fig = plt.figure(figsize=[12, 8])
 # Plot the raster data using matplotlib

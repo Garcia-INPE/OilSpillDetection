@@ -2,12 +2,20 @@ import os
 import cv2
 import math
 import numpy as np
+import importlib
 from matplotlib import pyplot as plt
 
-CRS = 3857  # TODO: Check!   # 3857 (meters) | 4326 (degress, WGS84)
+import FunDiv as FDiv
+importlib.reload(FDiv)
 
 
 def get_shape_features(pol_deg, plot_pol=False):
+
+    # CRS fixo não é correto, é preciso calcula o UTM correto para o centroide do bbox do polígono
+    # Para poder calcular estatísticas em metros
+    CRS = 3857  # TODO: Check!   # 3857 (meters) | 4326 (degress, WGS84)
+    CRS = FDiv.get_epsg_from_latlon(centr_deg_lat, centr_deg_lon)
+
     # polygon's geometry georrefeenced in meters
     pol_m = pol_deg.to_crs(CRS)
     bounds = {'LOC_POL_BBOX_X1_DEG': float(pol_deg.bounds.minx.iloc[0]),
