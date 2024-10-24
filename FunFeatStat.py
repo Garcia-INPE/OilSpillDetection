@@ -1,14 +1,14 @@
-import os
-import warnings
-import importlib
-import numpy as np
 from shapely import geometry
 from rasterio import plot as rasterplot
 # from rasterio.plot import show
-import geopandas as gpd
 from matplotlib import pyplot as plt
-import Functions as Fun
-importlib.reload(Fun)
+import os
+import warnings
+import geopandas as gpd
+import importlib
+import numpy as np
+import FunDiv
+importlib.reload(FunDiv)
 
 
 def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False):
@@ -20,7 +20,7 @@ def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False
     # "FG_STD", "FG_VAR", "FG_MIN", "FG_MAX", "FG_MEAN", "FG_MEDIAN", "FG_VAR_COEF",
     # -----------------------------------------------------------------------
     # Retorna MaskedArray e máscara do polígono
-    masked_bg, _ = Fun.get_masked_array_from_vector(
+    masked_bg, _ = FunDiv.get_masked_array_from_vector(
         tiff16, gdf_poly.geometry, filled=False, crop=True, invert=False)
     # plt.imshow(masked[0, :, :]); plt.show()
 
@@ -84,7 +84,7 @@ def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False
     """
 
     # Retorna MaskedArray e máscara da parte de fora dos polígonos dentro do bbox
-    masked_fg, _ = Fun.get_masked_array_from_vector(
+    masked_fg, _ = FunDiv.get_masked_array_from_vector(
         tiff16, gdf_all_inside_bbox.geometry, filled=False, crop=True, invert=False)
     # Plota feições originais e fundo mascarado
     # plt.imshow(masked[0, :, :], cmap='Greys'); plt.show()

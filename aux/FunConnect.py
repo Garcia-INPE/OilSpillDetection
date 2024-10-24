@@ -18,8 +18,8 @@ def get_cred(org, keyword):
 
 def get_token_copernicus():
     # Your client credentials
-    client_id = 'sh-d24f4817-0580-483e-8848-9da97d8c598b'
-    client_secret = 'tyIiP93xpxV2nHyPVJ87YmDKwBIvsmoR'
+    client_id = ''
+    client_secret = ''
 
     # Create a session
     client = BackendApplicationClient(client_id=client_id)

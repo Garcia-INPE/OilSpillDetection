@@ -55,6 +55,7 @@ def get_shape_features(pol_deg, plot_pol=False):
 
 
 def get_huMomentun(pol_m):
+    # https://learnopencv.com/shape-matching-using-hu-moments-c-python/
     fname = "pol_huMom.jpg"
     pol_m.plot()
     # plt.show()
