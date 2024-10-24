@@ -11,29 +11,29 @@ import FunDiv
 importlib.reload(FunDiv)
 
 
-def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False):
-    # dict_ret = dict_feat_stat
+def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
+    # pol_deg = gdf_pol.geometry
 
     # -----------------------------------------------------------------------
     # Parte 1) Estatísticas do conteúdo de dentro do polígono
     # LISTA DE CARACTERÍSTICAS ESTATÍSTICAS A SEREM GERADAS
-    # "FG_STD", "FG_VAR", "FG_MIN", "FG_MAX", "FG_MEAN", "FG_MEDIAN", "FG_VAR_COEF",
+    # "IN_STD", "IN_VAR", "IN_MIN", "IN_MAX", "IN_MEAN", "IN_MEDIAN", "IN_VAR_COEF",
     # -----------------------------------------------------------------------
     # Retorna MaskedArray e máscara do polígono
     masked_bg, _ = FunDiv.get_masked_array_from_vector(
-        tiff16, gdf_poly.geometry, filled=False, crop=True, invert=False)
+        tiff16, pol_deg.geometry, filled=False, crop=True, invert=False)
     # plt.imshow(masked[0, :, :]); plt.show()
 
     # Checa se todos os valores da máscara são True
     # Que significa que todos estão escondidos (mascarado)
     if not masked_bg.mask.all():
-        dict_ret["FG_STD"] = np.ma.std(masked_bg)
-        dict_ret["FG_VAR"] = np.ma.var(masked_bg)
-        dict_ret["FG_MIN"] = np.ma.min(masked_bg)
-        dict_ret["FG_MAX"] = np.ma.max(masked_bg)
-        dict_ret["FG_MEAN"] = np.ma.mean(masked_bg)
-        dict_ret["FG_MEDIAN"] = np.ma.median(masked_bg)
-        dict_ret["FG_VAR_COEF"] = dict_ret["FG_STD"] / dict_ret["FG_MEAN"]
+        dict_in = {"IN_STD": float(np.ma.std(masked_bg)),
+                   "IN_VAR": float(np.ma.var(masked_bg)),
+                   "IN_MIN": float(np.ma.min(masked_bg)),
+                   "IN_MAX": float(np.ma.max(masked_bg)),
+                   "IN_MEAN": float(np.ma.mean(masked_bg)),
+                   "IN_MEDIAN": float(np.ma.median(masked_bg)),
+                   "IN_VAR_COEF": float(np.ma.std(masked_bg) / np.ma.mean(masked_bg))}
 
     # -----------------------------------------------------------------------
     # Parte 2) Estatísticas do conteúdo de fora do polígono
@@ -41,14 +41,13 @@ def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False
     # LISTA DE CARACTERÍSTICAS ESTATÍSTICAS A SEREM GERADAS
     # "BG_STD", "BG_VAR", "BG_MIN", "BG_MAX", "BG_MEAN", "BG_MEDIAN", "BG_VAR_COEF", "FG_DARK_INTENS"
     # -----------------------------------------------------------------------
-
     # Bbox do raster
     # bbox_raster = geometry.box(tiff16.bounds[0], tiff16.bounds[1],
     #                           tiff16.bounds[2], tiff16.bounds[3])
     # Cria uma geometria cujos limites são o bbox do polígono sendo analisado
     exp_deg = 0.0
-    bbox_pol = geometry.box(gdf_poly.total_bounds[0]-exp_deg, gdf_poly.total_bounds[1]-exp_deg,
-                            gdf_poly.total_bounds[2]+exp_deg, gdf_poly.total_bounds[3]+exp_deg)
+    bbox_pol = geometry.box(pol_deg.total_bounds[0]-exp_deg, pol_deg.total_bounds[1]-exp_deg,
+                            pol_deg.total_bounds[2]+exp_deg, pol_deg.total_bounds[3]+exp_deg)
     # import shapely
     # bbox_raster.intersects(bbox_pol), bbox_pol.intersects(bbox_raster)
     # res = shapely.union(bbox_pol, bbox_raster)
@@ -84,7 +83,7 @@ def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False
     """
 
     # Retorna MaskedArray e máscara da parte de fora dos polígonos dentro do bbox
-    masked_fg, _ = FunDiv.get_masked_array_from_vector(
+    masked_fg, _ = Fun.get_masked_array_from_vector(
         tiff16, gdf_all_inside_bbox.geometry, filled=False, crop=True, invert=False)
     # Plota feições originais e fundo mascarado
     # plt.imshow(masked[0, :, :], cmap='Greys'); plt.show()
@@ -134,8 +133,8 @@ def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False
         axs[1, 2].set_title(f"Inv Mask {masked_fg.mask[0, :, :].shape}")
         fig.colorbar(i12, ax=axs[1, 2])
         # plt.show()
-        fname_img = f"./img{os.sep}{inters_check}_IDX_IMG-{gdf_poly.Id.iloc[0]}_IDX_MPOLY-{
-            gdf_poly.index[0][0]}_IDX_POLY-{gdf_poly.index[0][1]}.png"
+        fname_img = f"./img{os.sep}{inters_check}_IDX_IMG-{pol_deg.Id.iloc[0]}_IDX_MPOLY-{
+            pol_deg.index[0][0]}_IDX_POLY-{pol_deg.index[0][1]}.png"
         plt.savefig(fname_img)
         plt.close()
         # print(fname_img)
@@ -153,5 +152,4 @@ def get_feat_stat(gdf_img_polys, gdf_poly, dict_ret, tiff16, matched, plot=False
         # "FG_BG_THRES", "FG_BG_MAX_CONTRAST", "POWER_MEAN_RATIO", "FG_BG_MEAN_CONTRAST_RATIO",
         # Gradientes e Bordas (Considerar somente o contorno????)
         # "BORDER_GRAD_STD", "BORDER_GRAD_MEAN", "BORDER_GRAD_MAX"]
-
-    return (dict_ret)
+    return (dict_in)

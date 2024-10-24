@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 import Functions as Fun
 importlib.reload(Fun)
 
-area_factor = 1000000
+area_factor = 1000000  # 1000 x 1000
 len_factor = 1000
 
 # https://learnopencv.com/shape-matching-using-hu-moments-c-python/
@@ -45,10 +45,10 @@ def get_feat_geom(gdf_poly, dict_ret):
 
     # METHOD 2 for centroid estipulation --> CRS = 32634 (WRONG) ---------------------------------
     # Polygon's bbox in degrees: minx, miny, maxx, maxy
-    # minx_deg, miny_deg, maxx_deg, maxy_deg = pol_deg.total_bounds
+    # minx_deg, miny_deg, maxx_deg, maxy_deg = pol_deg.geometry.bounds
     # Centroid of the polygons's bbox in degrees
     # centr_deg_lat = (miny_deg+maxy_deg)/2
-    # centr_deg_lon = (miny_deg+maxy_deg)/2
+    # centr_deg_lon = (minx_deg+maxx_deg)/2
 
     # Calcula o UTM correto para o centroide do bbox do polígono
     # Para poder calcular estatísticas em metros

@@ -1,6 +1,113 @@
 import os
 import re
 import math
+import logging
+import numpy as np
+from rasterio.mask import mask
+
+
+def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, invert=False):
+    # raster=tiff16; vectors=gdf_pol_deg.geometry; filled=False; crop=True; invert=False
+    """
+    Do the clip operation (creates a MaskedArray)
+    Pixels are masked or set to nodata outside the input shapes, unless
+    Resources: https://atcoordinates.info/2023/05/30/clipping-rasters-and-extracting-values-with-geospatial-python/
+               https://py.geocompx.org/05-raster-vector
+    filled: If True, the pixels outside the features will be set to nodata. Output is np.ndarray. \
+            If False, the output array will contain the original pixel data, and only the mask will \
+                be based on shapes. Output is np.MaskedArray. Defaults to True.
+    crop: Whether to crop the raster to the extent of the shapes. Defaults to False.
+    """
+    # Cria o masked array ou array
+    masked_array, transform = mask(
+        raster, vectors, filled=filled, crop=crop, invert=invert, nodata=np.nan)
+    """
+    When you operate on masked arrays, it takes the union of the masks involved in the operation.
+    The package ensures that masked entries are not used in computations.
+    Mask = True means data was masked (invalid)
+    Mask = False means data was unmasked (valid)
+    np.ma.getmask(masked).max()
+    masked.min(), masked.max()
+    np.min(masked), np.max(masked)
+    np.ma.min(masked), np.ma.max(masked)
+    raste.shape, masked_raster.shape
+    """
+    # masked_data = raster.read(1)  # Retorna um Numpy array
+    # masked_data.shape, raster.shape
+    """ 
+    Attributes for MakedArray
+    type(masked_array)  # Numpy MaskedArray
+    masked_array.data
+    masked_array.mask
+    masked_array.fill_value
+    masked_array.shape
+    """
+    # Copy the metadata from the source and update the new clipped layer
+    meta = raster.meta.copy()
+    meta.update({
+        "driver": "GTiff",
+        "height": masked_array.shape[1],  # height starts with shape[1]
+        "width": masked_array.shape[2],   # width starts with shape[2]
+        "transform": transform})
+    """
+    masked_data.min(), masked_data.max()
+    np.min(masked_data), np.max(masked_data)
+    np.ma.min(masked_data), np.ma.max(masked_data)
+    """
+    return (masked_array, transform)
+
+
+def get_centroid(pol_deg):
+    # https://gis.stackexchange.com/questions/372564/userwarning-when-trying-to-get-centroid-from-a-polygon-geopandas
+    # CRS = 3857 (meters) | 4326 (degress, WGS84)
+
+    # pol_deg = gdf_pol.geometry
+    # ---------------------------------------------------------------------
+    # 1) METHOD default for centroid estipulation
+    # A warning raises but, at the end, calculated area and perim values
+    # match DS values
+    # ---------------------------------------------------------------------
+    logging.captureWarnings(True)
+    default_centroid = float(pol_deg.geometry.centroid.y), float(
+        pol_deg.geometry.centroid.x)
+    logging.captureWarnings(False)
+
+    # ---------------------------------------------------------------------
+    # 2) METHOD medium point for centroid estipulation (JR)
+    # ---------------------------------------------------------------------
+    # minx_deg, miny_deg, maxx_deg, maxy_deg = [
+    #     float(pol_deg.geometry.bounds[x]) for x in ['minx', 'miny', 'maxx', 'maxy']]
+    # medium_point_centroid = (miny_deg+maxy_deg)/2, (minx_deg+maxx_deg)/2
+
+    # ---------------------------------------------------------------------
+    # 3) METHOD Projection MERCATOR for centroid estipulation
+    # ---------------------------------------------------------------------
+    # centroid_mercator = pol_deg.to_crs(
+    #     'epsg:3785').centroid.to_crs(pol_deg.crs)
+    # centroid_mercator = float(centroid_mercator.y), float(centroid_mercator.x)
+
+    # ---------------------------------------------------------------------
+    # 4) METHOD Projection equal area for centroid estipulation
+    # ---------------------------------------------------------------------
+    # centroid_equal_area = pol_deg.to_crs(
+    #     '+proj=cea').centroid.to_crs(pol_deg.crs)
+    # centroid_equal_area = float(
+    #     centroid_equal_area.y), float(centroid_equal_area.x)
+
+    # ---------------------------------------------------------------------
+    # 5) METHOD Projection in meters for centroid estipulation
+    # Idem MERCATOR
+    # ---------------------------------------------------------------------
+    # centroid_m = pol_deg.to_crs(3857).centroid.to_crs(pol_deg.crs)
+    # centroid_m = float(centroid_m.y), float(centroid_m.x)
+
+    # print(
+    #     '\nDefault centroid.....:', default_centroid,
+    #     '\nMedium Point centroid:', medium_point_centroid,
+    #     '\nMercator centroid....:', centroid_mercator,
+    #     '\nEqual Area centroid..:', centroid_equal_area,
+    #     '\nIn Meters centroid...:', centroid_m)
+    return (default_centroid)
 
 
 def get_epsg_from_latlon(lat, lon):
