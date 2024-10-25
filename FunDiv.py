@@ -9,7 +9,7 @@ from rasterio.mask import mask
 def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, invert=False):
     # raster=tiff16; vectors=gdf_pol_deg.geometry; filled=False; crop=True; invert=False
     """
-    Do the clip operation (creates a MaskedArray)
+    Do the clip operation (creates a MaskedArray with the polygon only)
     Pixels are masked or set to nodata outside the input shapes, unless
     Resources: https://atcoordinates.info/2023/05/30/clipping-rasters-and-extracting-values-with-geospatial-python/
                https://py.geocompx.org/05-raster-vector

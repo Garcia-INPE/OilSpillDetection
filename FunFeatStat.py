@@ -15,25 +15,24 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     # pol_deg = gdf_pol.geometry
 
     # -----------------------------------------------------------------------
-    # Parte 1) Estatísticas do conteúdo de dentro do polígono
-    # LISTA DE CARACTERÍSTICAS ESTATÍSTICAS A SEREM GERADAS
-    # "IN_STD", "IN_VAR", "IN_MIN", "IN_MAX", "IN_MEAN", "IN_MEDIAN", "IN_VAR_COEF",
+    # Part 1) Statistics from inside of the polygon
     # -----------------------------------------------------------------------
-    # Retorna MaskedArray e máscara do polígono
-    masked_bg, _ = FunDiv.get_masked_array_from_vector(
+    # Gets only the polygon
+    masked_pol, _ = FunDiv.get_masked_array_from_vector(
         tiff16, pol_deg.geometry, filled=False, crop=True, invert=False)
-    # plt.imshow(masked[0, :, :]); plt.show()
+    # Check it by plotting it
+    # plt.imshow(masked_pol[0, :, :]); plt.show()
 
     # Checa se todos os valores da máscara são True
     # Que significa que todos estão escondidos (mascarado)
-    if not masked_bg.mask.all():
-        dict_in = {"IN_STD": float(np.ma.std(masked_bg)),
-                   "IN_VAR": float(np.ma.var(masked_bg)),
-                   "IN_MIN": float(np.ma.min(masked_bg)),
-                   "IN_MAX": float(np.ma.max(masked_bg)),
-                   "IN_MEAN": float(np.ma.mean(masked_bg)),
-                   "IN_MEDIAN": float(np.ma.median(masked_bg)),
-                   "IN_VAR_COEF": float(np.ma.std(masked_bg) / np.ma.mean(masked_bg))}
+    # if not masked_bg.mask.all():
+    dict_in = {"IN_STD": float(np.ma.std(masked_pol)),
+               "IN_VAR": float(np.ma.var(masked_pol)),
+               "IN_MIN": float(np.ma.min(masked_pol)),
+               "IN_MAX": float(np.ma.max(masked_pol)),
+               "IN_MEAN": float(np.ma.mean(masked_pol)),
+               "IN_MEDIAN": float(np.ma.median(masked_pol)),
+               "IN_VAR_COEF": float(np.ma.std(masked_pol) / np.ma.mean(masked_pol))}
 
     # -----------------------------------------------------------------------
     # Parte 2) Estatísticas do conteúdo de fora do polígono
@@ -45,111 +44,111 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     # bbox_raster = geometry.box(tiff16.bounds[0], tiff16.bounds[1],
     #                           tiff16.bounds[2], tiff16.bounds[3])
     # Cria uma geometria cujos limites são o bbox do polígono sendo analisado
-    exp_deg = 0.0
-    bbox_pol = geometry.box(pol_deg.total_bounds[0]-exp_deg, pol_deg.total_bounds[1]-exp_deg,
-                            pol_deg.total_bounds[2]+exp_deg, pol_deg.total_bounds[3]+exp_deg)
-    # import shapely
-    # bbox_raster.intersects(bbox_pol), bbox_pol.intersects(bbox_raster)
-    # res = shapely.union(bbox_pol, bbox_raster)
-    # fig, ax = plt.subplots()
-    # plt.plot(*bbox_raster.exterior.xy, color="red");
-    # plt.plot(*bbox_pol.exterior.xy, color="blue"); plt.show()
+    # exp_deg = 0.0
+    # bbox_pol = geometry.box(pol_deg.total_bounds[0]-exp_deg, pol_deg.total_bounds[1]-exp_deg,
+    #                         pol_deg.total_bounds[2]+exp_deg, pol_deg.total_bounds[3]+exp_deg)
+    # # import shapely
+    # # bbox_raster.intersects(bbox_pol), bbox_pol.intersects(bbox_raster)
+    # # res = shapely.union(bbox_pol, bbox_raster)
+    # # fig, ax = plt.subplots()
+    # # plt.plot(*bbox_raster.exterior.xy, color="red");
+    # # plt.plot(*bbox_pol.exterior.xy, color="blue"); plt.show()
 
-    # Cria um GeoPandas DataFrame com o bbox, georreferenciado pelo mesmo CRS
-    gdf_bbox = gpd.GeoDataFrame(gpd.GeoSeries(bbox_pol), columns=[
-        'geometry'], crs=tiff16.crs)
-    # Captura todos os polígonos que intersectam com o bbox do polígono sendo analisado
-    warnings.filterwarnings('error')
-    inters_check = "OK"
-    try:
-        gdf_all_inside_bbox = gpd.overlay(
-            gdf_img_polys, gdf_bbox, how='intersection', keep_geom_type=True, make_valid=True)
-    except:
-        inters_check = "FAIL"
-        warnings.resetwarnings()
-        gdf_all_inside_bbox = gpd.overlay(
-            gdf_img_polys, gdf_bbox, how='intersection', keep_geom_type=True, make_valid=True)
-        if matched:
-            return ()
-    warnings.resetwarnings()
+    # # Cria um GeoPandas DataFrame com o bbox, georreferenciado pelo mesmo CRS
+    # gdf_bbox = gpd.GeoDataFrame(gpd.GeoSeries(bbox_pol), columns=[
+    #     'geometry'], crs=tiff16.crs)
+    # # Captura todos os polígonos que intersectam com o bbox do polígono sendo analisado
+    # warnings.filterwarnings('error')
+    # inters_check = "OK"
+    # try:
+    #     gdf_all_inside_bbox = gpd.overlay(
+    #         gdf_img_polys, gdf_bbox, how='intersection', keep_geom_type=True, make_valid=True)
+    # except:
+    #     inters_check = "FAIL"
+    #     warnings.resetwarnings()
+    #     gdf_all_inside_bbox = gpd.overlay(
+    #         gdf_img_polys, gdf_bbox, how='intersection', keep_geom_type=True, make_valid=True)
+    #     if matched:
+    #         return ()
+    # warnings.resetwarnings()
 
-    # list([gdf_img_polys.iloc[[x, ]].intersects(gdf_bbox, align=False)
-    #     for x in range(len(gdf_img_polys))])
+    # # list([gdf_img_polys.iloc[[x, ]].intersects(gdf_bbox, align=False)
+    # #     for x in range(len(gdf_img_polys))])
 
-    """
-    gdf_img_polys.iloc[[1, ]].total_bounds
-    gdf_bbox.total_bounds
-    gdf_bbox.plot(); gdf_pol_deg.plot(); plt.show()
-    """
-
-    # Retorna MaskedArray e máscara da parte de fora dos polígonos dentro do bbox
-    masked_fg, _ = Fun.get_masked_array_from_vector(
-        tiff16, gdf_all_inside_bbox.geometry, filled=False, crop=True, invert=False)
-    # Plota feições originais e fundo mascarado
-    # plt.imshow(masked[0, :, :], cmap='Greys'); plt.show()
-    masked_ori = masked_fg.copy()  # Inverte manualmente as máscaras
-    masked_fg.mask = ~masked_fg.mask  # Inverte manualmente as máscaras
-    # masked.shape
+    # """
+    # gdf_img_polys.iloc[[1, ]].total_bounds
     # gdf_bbox.total_bounds
-    # gdf_all_inside_bbox.total_bounds
-    """
-    # Plota feições mascaradas e fundo original
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
-    ax1.imshow(masked.data[0, :, :], cmap='Greys'); plt.set_title("Data")
-    ax2.imshow(masked_ori[0, :, :], cmap='Greys'); plt.set_title("Ori Mask")
-    ax3.imshow(masked.mask[0, :, :], cmap='Greys'); plt.set_title("Inv Mask")
-    plt.show()
-    """
-    if plot:
-        # Plota o polígono e bbox para todos
-        fig, axs = plt.subplots(2, 3, figsize=(20, 10))  # nopep8
-        # rasterplot.show(tiff16, ax=ax, title='TIFF')
-        gdf_img_polys.plot(ax=axs[0, 0], color="blue")
-        gdf_bbox.plot(ax=axs[0, 0], facecolor="none", edgecolor='red')
-        exp_deg = 0.0015
-        axs[0, 0].set_xlim(
-            gdf_all_inside_bbox.total_bounds[0]-exp_deg, gdf_all_inside_bbox.total_bounds[2]+exp_deg)
-        axs[0, 0].set_ylim(
-            gdf_all_inside_bbox.total_bounds[1]-exp_deg, gdf_all_inside_bbox.total_bounds[3]+exp_deg)
-        axs[0, 0].set_title("Bbox exp")
+    # gdf_bbox.plot(); gdf_pol_deg.plot(); plt.show()
+    # """
 
-        i01 = gdf_all_inside_bbox.plot(ax=axs[0, 1], color="green")
-        axs[0, 1].set_title("Bbox")
-        # fig.colorbar(i01, ax=axs[0, 1])
+    # # Retorna MaskedArray e máscara da parte de fora dos polígonos dentro do bbox
+    # masked_fg, _ = Fun.get_masked_array_from_vector(
+    #     tiff16, gdf_all_inside_bbox.geometry, filled=False, crop=True, invert=False)
+    # # Plota feições originais e fundo mascarado
+    # # plt.imshow(masked[0, :, :], cmap='Greys'); plt.show()
+    # masked_ori = masked_fg.copy()  # Inverte manualmente as máscaras
+    # masked_fg.mask = ~masked_fg.mask  # Inverte manualmente as máscaras
+    # # masked.shape
+    # # gdf_bbox.total_bounds
+    # # gdf_all_inside_bbox.total_bounds
+    # """
+    # # Plota feições mascaradas e fundo original
+    # fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+    # ax1.imshow(masked.data[0, :, :], cmap='Greys'); plt.set_title("Data")
+    # ax2.imshow(masked_ori[0, :, :], cmap='Greys'); plt.set_title("Ori Mask")
+    # ax3.imshow(masked.mask[0, :, :], cmap='Greys'); plt.set_title("Inv Mask")
+    # plt.show()
+    # """
+    # if plot:
+    #     # Plota o polígono e bbox para todos
+    #     fig, axs = plt.subplots(2, 3, figsize=(20, 10))  # nopep8
+    #     # rasterplot.show(tiff16, ax=ax, title='TIFF')
+    #     gdf_img_polys.plot(ax=axs[0, 0], color="blue")
+    #     gdf_bbox.plot(ax=axs[0, 0], facecolor="none", edgecolor='red')
+    #     exp_deg = 0.0015
+    #     axs[0, 0].set_xlim(
+    #         gdf_all_inside_bbox.total_bounds[0]-exp_deg, gdf_all_inside_bbox.total_bounds[2]+exp_deg)
+    #     axs[0, 0].set_ylim(
+    #         gdf_all_inside_bbox.total_bounds[1]-exp_deg, gdf_all_inside_bbox.total_bounds[3]+exp_deg)
+    #     axs[0, 0].set_title("Bbox exp")
 
-        i02 = axs[0, 2].imshow(masked_ori[0, :, :])
-        axs[0, 2].set_title(f"Masked Data Ori {masked_ori[0, :, :].shape}")
-        fig.colorbar(i02, ax=axs[0, 2])
+    #     i01 = gdf_all_inside_bbox.plot(ax=axs[0, 1], color="green")
+    #     axs[0, 1].set_title("Bbox")
+    #     # fig.colorbar(i01, ax=axs[0, 1])
 
-        i10 = axs[1, 0].imshow(masked_fg[0, :, :])
-        axs[1, 0].set_title(f"Masked Data Inv {masked_fg[0, :, :].shape}")
-        fig.colorbar(i10, ax=axs[1, 0])
+    #     i02 = axs[0, 2].imshow(masked_ori[0, :, :])
+    #     axs[0, 2].set_title(f"Masked Data Ori {masked_ori[0, :, :].shape}")
+    #     fig.colorbar(i02, ax=axs[0, 2])
 
-        i11 = axs[1, 1].imshow(masked_ori.mask[0, :, :], cmap='Greys')
-        axs[1, 1].set_title(f"Ori Mask {masked_ori.mask[0, :, :].shape}")
-        fig.colorbar(i11, ax=axs[1, 1])
+    #     i10 = axs[1, 0].imshow(masked_fg[0, :, :])
+    #     axs[1, 0].set_title(f"Masked Data Inv {masked_fg[0, :, :].shape}")
+    #     fig.colorbar(i10, ax=axs[1, 0])
 
-        i12 = axs[1, 2].imshow(masked_fg.mask[0, :, :], cmap='Greys')
-        axs[1, 2].set_title(f"Inv Mask {masked_fg.mask[0, :, :].shape}")
-        fig.colorbar(i12, ax=axs[1, 2])
-        # plt.show()
-        fname_img = f"./img{os.sep}{inters_check}_IDX_IMG-{pol_deg.Id.iloc[0]}_IDX_MPOLY-{
-            pol_deg.index[0][0]}_IDX_POLY-{pol_deg.index[0][1]}.png"
-        plt.savefig(fname_img)
-        plt.close()
-        # print(fname_img)
+    #     i11 = axs[1, 1].imshow(masked_ori.mask[0, :, :], cmap='Greys')
+    #     axs[1, 1].set_title(f"Ori Mask {masked_ori.mask[0, :, :].shape}")
+    #     fig.colorbar(i11, ax=axs[1, 1])
 
-    if not masked_fg.mask.all():
-        dict_ret["BG_STD"] = np.ma.std(masked_fg)
-        dict_ret["BG_VAR"] = np.ma.var(masked_fg)
-        dict_ret["BG_MIN"] = np.ma.min(masked_fg)
-        dict_ret["BG_MAX"] = np.ma.max(masked_fg)
-        dict_ret["BG_MEAN"] = np.ma.mean(masked_fg)
-        dict_ret["BG_MEDIAN"] = np.ma.median(masked_fg)
-        dict_ret["BG_VAR_COEF"] = dict_ret["BG_STD"] / dict_ret["BG_MEAN"]
-        dict_ret["FG_DARK_INTENS"] = dict_ret["BG_MEAN"] - dict_ret["FG_MEAN"]
+    #     i12 = axs[1, 2].imshow(masked_fg.mask[0, :, :], cmap='Greys')
+    #     axs[1, 2].set_title(f"Inv Mask {masked_fg.mask[0, :, :].shape}")
+    #     fig.colorbar(i12, ax=axs[1, 2])
+    #     # plt.show()
+    #     fname_img = f"./img{os.sep}{inters_check}_IDX_IMG-{pol_deg.Id.iloc[0]}_IDX_MPOLY-{
+    #         pol_deg.index[0][0]}_IDX_POLY-{pol_deg.index[0][1]}.png"
+    #     plt.savefig(fname_img)
+    #     plt.close()
+    #     # print(fname_img)
 
-        # "FG_BG_THRES", "FG_BG_MAX_CONTRAST", "POWER_MEAN_RATIO", "FG_BG_MEAN_CONTRAST_RATIO",
-        # Gradientes e Bordas (Considerar somente o contorno????)
-        # "BORDER_GRAD_STD", "BORDER_GRAD_MEAN", "BORDER_GRAD_MAX"]
-    return (dict_in)
+    # if not masked_fg.mask.all():
+    #     dict_ret["BG_STD"] = np.ma.std(masked_fg)
+    #     dict_ret["BG_VAR"] = np.ma.var(masked_fg)
+    #     dict_ret["BG_MIN"] = np.ma.min(masked_fg)
+    #     dict_ret["BG_MAX"] = np.ma.max(masked_fg)
+    #     dict_ret["BG_MEAN"] = np.ma.mean(masked_fg)
+    #     dict_ret["BG_MEDIAN"] = np.ma.median(masked_fg)
+    #     dict_ret["BG_VAR_COEF"] = dict_ret["BG_STD"] / dict_ret["BG_MEAN"]
+    #     dict_ret["FG_DARK_INTENS"] = dict_ret["BG_MEAN"] - dict_ret["FG_MEAN"]
+
+    #     # "FG_BG_THRES", "FG_BG_MAX_CONTRAST", "POWER_MEAN_RATIO", "FG_BG_MEAN_CONTRAST_RATIO",
+    #     # Gradientes e Bordas (Considerar somente o contorno????)
+    #     # "BORDER_GRAD_STD", "BORDER_GRAD_MEAN", "BORDER_GRAD_MAX"]
+    # return (dict_in)

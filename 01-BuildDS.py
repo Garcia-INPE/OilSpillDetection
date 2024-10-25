@@ -1,15 +1,13 @@
 from rasterio.plot import show
 from rasterio.windows import Window
 from rasterio.mask import mask as rioMask
-from os.path import expanduser
 from matplotlib import pyplot as plt
 from rasterio import plot as rasterplot
+import rasterio.windows
 from shapely.geometry import MultiPolygon, Polygon
 import rasterio.mask
 import rasterio
 import geopandas as gpd
-import pandas as pd
-import glob
 import csv
 import os
 import re
@@ -18,37 +16,21 @@ import importlib
 import FunDiv as FunDiv
 import FunFeatShape as FunShape
 import FunFeatStat as FunStat
+import FunPlot as FunPlot
+
+from Config import *
+
 importlib.reload(FunDiv)
 importlib.reload(FunShape)
 importlib.reload(FunStat)
+importlib.reload(FunPlot)
 
-# A cross-platform way to get the home directory
-home = expanduser("~")
+# pd.set_option("display.max_columns", 1000)
 
-pd.set_option("display.max_columns", 1000)
-
-dir_img = "./img"
-os.makedirs(dir_img, exist_ok=True)
-dir_ds = f"{home}/ProjData/Oil-Datasets/Cantarell"
-dir_raw_data = dir_ds                 # Root dir where .SAFE dir is
-dir_tif8 = f"{dir_ds}/8bits"          # To print
-dir_tif16 = f"{dir_ds}/Calibrada"     # To extract features
-fname_vetores = f"{
-    dir_ds}/Vetores/Oil_slick/OilSlicks_Cantarell_GEOG_18052022_01.shp"
 vetores = gpd.read_file(fname_vetores)
 # Nomes das imagens TIF do diretório
 
-# Captura todas as imagens dos diretórios
-fnames_img8 = sorted(glob.glob(f"{dir_tif8}/*_8b.tif"))
-fnames_img16 = sorted(glob.glob(f"{dir_tif16}/*_NR_Orb_Cal_TC.tif"))
-
-# Filtra somente Sentinel-1
-# Lista devem ter mesmo tamanho, relação 1:1 (8bits:16bits)
-fnames_img8 = [f for f in fnames_img8 if re.search(
-    "[0-9]{2} S1A_IW_GRDH_1SDV_", os.path.basename(f))]
-fnames_img16 = [f for f in fnames_img16 if re.search(
-    "[0-9]{2} S1A_IW_GRDH_1SDV_", os.path.basename(f))]
-assert len(fnames_img8) == len(fnames_img16)
+todo plotar segmento em cima do bb
 
 # Open output CSV for writing (DS-OIL)
 with open('stats.csv', 'w') as f1:
@@ -75,6 +57,7 @@ with open('stats.csv', 'w') as f1:
         # Abre o raster (o TIFF)
         # tiff = rioxarray.open_rasterio(fname_img, masked=True, chunks=True)
         tiff16 = rasterio.open(fname_img, masked=True, chunks=True)
+        # rasterplot.show(tiff16)
 
         # Captura todas as geometrias (polígonos) referentes à imagem
         gdf_img_mpolys = vetores[vetores['Id'] == id_img]
@@ -110,19 +93,50 @@ with open('stats.csv', 'w') as f1:
                   dict_head_pol['IDX_POLYG'])
 
             dict_shape_feat = FunShape.get_shape_features(gdf_pol.geometry)
-            importlib.reload(FunStat)
+
             dict_stat_feat = FunStat.get_stat_features(
                 gdf_img_polys, gdf_pol.geometry, tiff16)
 
             # Contatenates dicts
-            line = dict_tiff | dict_head_vect | dict_head_pol | dict_shape_feat | dict_tail_vect
+            pol_info = dict_tiff | dict_head_vect | dict_head_pol | dict_shape_feat | dict_tail_vect
 
             # Writes the CSV header if is the 1st polygon
             if idx_img == 0 and gdf_pol.index[0] == (0, 0):
-                _ = writer.writerow(line.keys())
+                _ = writer.writerow(pol_info.keys())
 
-            # Escreve a linha
-            _ = writer.writerow(line.values())
+            # Appends the data line in the CSV
+            _ = writer.writerow(pol_info.values())
+
+            # Plot the polygon (individually)
+            FunPlot.plot_pol(gdf_pol, pol_info)
+
+            # Plot the valued polygon's bbox
+            FunPlot.plot_bbox_png(gdf_pol, tiff16, pol_info)
+
+    # # Copy the metadata from the source and update the new clipped layer
+    # out_meta = tiff16.meta.copy()
+    # out_meta.update({
+    #     "driver": "GTiff",
+    #     "height": out_raster.shape[1],  # height starts with shape[1]
+    #     "width": out_raster.shape[2],  # width starts with shape[2]
+    #     "transform": out_transform})
+    # # Write output to file
+    # out_file = 'clip.tif'
+    # with rasterio.open(out_file, 'w', **out_meta) as dest:
+    #     dest.write(out_raster)
+
+    # clip = rasterio.open("clip.tif", masked=False, chunks=True)
+    # clip.shape
+    # rasterplot.show(clip, cmap="gray")
+
+    # from rasterio.plot import show
+    # fig, ax = plt.subplots()
+    # areabbox.plot(ax=ax, facecolor='none', edgecolor='black', lw=1.0)
+    # rasterplot.show(tiff16, ax=ax)
+    # plt.show()
+
+    # fig, ax = plt.subplots(figsize=(12, 12))
+    # show(out_raster, ax=ax)
 
     #     # Plotting
     #     pol_deg.geometry.plot(facecolor='w', edgecolor='red')
@@ -174,8 +188,6 @@ with open('stats.csv', 'w') as f1:
     #              orientation='vertical', extend='both', shrink=0.5)
     # plt.show()
 
-    # xmin, xmax, ymin, ymax = float(pol_deg.bounds.minx), float(
-    #     pol_deg.bounds.maxx), float(pol_deg.bounds.miny), float(pol_deg.bounds.maxy)
     # bbox = MultiPolygon(
     #     [Polygon([[xmin, ymin], [xmin, ymax], [xmax, ymax], [xmax, ymin]])])
     # tiff2 = rasterio.open(fname_img, masked=False, chunks=True)
