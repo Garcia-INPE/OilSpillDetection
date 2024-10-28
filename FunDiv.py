@@ -4,9 +4,17 @@ import math
 import logging
 import numpy as np
 from rasterio.mask import mask
+from sklearn.preprocessing import MinMaxScaler
 
 
-def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, invert=False):
+def scaler(ma2d, a=0, b=1):
+    data = ma2d.ravel().reshape(-1, 1)
+    scaler = MinMaxScaler((a, b))
+    scaler.fit(data)
+    return scaler.transform(data).astype(np.int16)
+
+
+def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, invert=False, nodata=np.nan):
     # raster=tiff16; vectors=gdf_pol_deg.geometry; filled=False; crop=True; invert=False
     """
     Do the clip operation (creates a MaskedArray with the polygon only)
@@ -20,7 +28,7 @@ def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, inver
     """
     # Cria o masked array ou array
     masked_array, transform = mask(
-        raster, vectors, filled=filled, crop=crop, invert=invert, nodata=np.nan)
+        raster, vectors, filled=filled, crop=crop, invert=invert, nodata=nodata)
     """
     When you operate on masked arrays, it takes the union of the masks involved in the operation.
     The package ensures that masked entries are not used in computations.
@@ -48,7 +56,9 @@ def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, inver
         "driver": "GTiff",
         "height": masked_array.shape[1],  # height starts with shape[1]
         "width": masked_array.shape[2],   # width starts with shape[2]
-        "transform": transform})
+        "transform": transform,
+        "nodata": nodata,
+        "crs": raster.crs.data})
     """
     masked_data.min(), masked_data.max()
     np.min(masked_data), np.max(masked_data)

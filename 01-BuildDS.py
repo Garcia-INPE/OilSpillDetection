@@ -1,28 +1,20 @@
-from rasterio.plot import show
-from rasterio.windows import Window
-from rasterio.mask import mask as rioMask
-from matplotlib import pyplot as plt
-from rasterio import plot as rasterplot
-import rasterio.windows
-from shapely.geometry import MultiPolygon, Polygon
-import rasterio.mask
 import rasterio
 import geopandas as gpd
 import csv
 import os
-import re
 
 import importlib
 import FunDiv as FunDiv
 import FunFeatShape as FunShape
 import FunFeatStat as FunStat
+import FunFeatTexture as FunText
 import FunPlot as FunPlot
-
 from Config import *
 
 importlib.reload(FunDiv)
 importlib.reload(FunShape)
 importlib.reload(FunStat)
+importlib.reload(FunText)
 importlib.reload(FunPlot)
 
 # pd.set_option("display.max_columns", 1000)
@@ -30,38 +22,43 @@ importlib.reload(FunPlot)
 vetores = gpd.read_file(fname_vetores)
 # Nomes das imagens TIF do diretório
 
-todo plotar segmento em cima do bb
-
 # Open output CSV for writing (DS-OIL)
 with open('stats.csv', 'w') as f1:
     writer = csv.writer(f1, delimiter=";", lineterminator='\n')
 
     idx_img = 0
-    fname_img = fnames_img16[idx_img]
+    fname_img16 = fnames_img16[idx_img]
     # Loop pelas imagens TIF encontradas no diretório
     for idx_img in range(len(fnames_img16)):
-        fname_img = fnames_img16[idx_img]
+        fname_img16 = fnames_img16[idx_img]
         # Basename (nome do arquivo somente, sem o path)
-        bname = os.path.basename(fname_img)
+        bname16 = os.path.basename(fname_img16)
         # Pega o ID da imagem do nome, para poder pegar seus vetores
-        id_img = int(bname.split(" ")[0])
-        flds = FunDiv.get_S1A_fname_fields(dir_raw_data, bname)
+        id_img = int(bname16.split(" ")[0])
+        flds = FunDiv.get_S1A_fname_fields(dir_raw_data, bname16)
 
         # 1st prefix for each row of the CSV (related to the image)
         dict_tiff = {'ID_IMG': id_img,
-                     'IMG_NAME': bname,
+                     'IMG_NAME': bname16,
                      'YEAR': flds['date_on'][:4],
                      'MONTH': flds['date_on'][4:6],
                      'DAY': flds['date_on'][6:]}
 
-        # Abre o raster (o TIFF)
+        # Abre o raster original (o GeoTIFF de 16 bits)
         # tiff = rioxarray.open_rasterio(fname_img, masked=True, chunks=True)
-        tiff16 = rasterio.open(fname_img, masked=True, chunks=True)
+        tiff16 = rasterio.open(fname_img16, chunks=True)
         # rasterplot.show(tiff16)
+
+        # Abre o raster 8b (o GeoTIFF de 8 bits)
+        bname8 = f"{bname16[:36]}8b.tif"
+        fname_img8 = f"{dir_tif8}/{bname8}"
+        tiff8 = rasterio.open(fname_img8, chunks=True)
+        # rasterplot.show(tiff8)
 
         # Captura todas as geometrias (polígonos) referentes à imagem
         gdf_img_mpolys = vetores[vetores['Id'] == id_img]
         gdf_img_mpolys.reset_index(inplace=True)
+        gdf_img_mpolys.crs = tiff16.crs
 
         # Converte todos os mutipolígonos da imagem em polígonos individuais
         # Os polígonos permanecem polígonos
@@ -97,8 +94,16 @@ with open('stats.csv', 'w') as f1:
             dict_stat_feat = FunStat.get_stat_features(
                 gdf_img_polys, gdf_pol.geometry, tiff16)
 
+            dict_text_feat = FunText.get_texture_features(
+                gdf_pol.geometry, tiff8)
+
+            # Adding 0.05 To prevent division by 0 error
+            dict_in_x_out = {"SLICK_DARKNESS": (
+                dict_stat_feat["IN_MEAN"] + 0.05) / (dict_stat_feat["OUT_MEAN"] + 0.05)}
+
             # Contatenates dicts
-            pol_info = dict_tiff | dict_head_vect | dict_head_pol | dict_shape_feat | dict_tail_vect
+            pol_info = dict_tiff | dict_head_vect | dict_head_pol | dict_shape_feat | \
+                dict_stat_feat | dict_text_feat | dict_in_x_out | dict_tail_vect
 
             # Writes the CSV header if is the 1st polygon
             if idx_img == 0 and gdf_pol.index[0] == (0, 0):
@@ -111,7 +116,7 @@ with open('stats.csv', 'w') as f1:
             FunPlot.plot_pol(gdf_pol, pol_info)
 
             # Plot the valued polygon's bbox
-            FunPlot.plot_bbox_png(gdf_pol, tiff16, pol_info)
+            FunPlot.plot_bbox_png(gdf_pol, tiff8, pol_info)
 
     # # Copy the metadata from the source and update the new clipped layer
     # out_meta = tiff16.meta.copy()

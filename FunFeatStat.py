@@ -1,13 +1,22 @@
 from shapely import geometry
 from rasterio import plot as rasterplot
+from rasterio.mask import mask
 # from rasterio.plot import show
 from matplotlib import pyplot as plt
+from shapely.geometry import Polygon, box
+
 import os
+import json
 import warnings
+import rasterio
 import geopandas as gpd
 import importlib
 import numpy as np
+
 import FunDiv
+from Config import *
+marg_exp = 0.0005
+
 importlib.reload(FunDiv)
 
 
@@ -35,120 +44,78 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
                "IN_VAR_COEF": float(np.ma.std(masked_pol) / np.ma.mean(masked_pol))}
 
     # -----------------------------------------------------------------------
-    # Parte 2) Estatísticas do conteúdo de fora do polígono
-    # (demais segmentos contidos no bb também fora)
-    # LISTA DE CARACTERÍSTICAS ESTATÍSTICAS A SEREM GERADAS
-    # "BG_STD", "BG_VAR", "BG_MIN", "BG_MAX", "BG_MEAN", "BG_MEDIAN", "BG_VAR_COEF", "FG_DARK_INTENS"
+    # Part 2) Statistics of the ocean outside the polygon being analysed
+    # Consider the expanded bbox of the polygon and don't consider the
+    # polygon and all other possible polygons inside the expandex bbox
+    # Intuition: save the expanded bbox as tiff and clip it with the
+    # gdf of all polygons
     # -----------------------------------------------------------------------
-    # Bbox do raster
-    # bbox_raster = geometry.box(tiff16.bounds[0], tiff16.bounds[1],
-    #                           tiff16.bounds[2], tiff16.bounds[3])
-    # Cria uma geometria cujos limites são o bbox do polígono sendo analisado
-    # exp_deg = 0.0
-    # bbox_pol = geometry.box(pol_deg.total_bounds[0]-exp_deg, pol_deg.total_bounds[1]-exp_deg,
-    #                         pol_deg.total_bounds[2]+exp_deg, pol_deg.total_bounds[3]+exp_deg)
-    # # import shapely
-    # # bbox_raster.intersects(bbox_pol), bbox_pol.intersects(bbox_raster)
-    # # res = shapely.union(bbox_pol, bbox_raster)
-    # # fig, ax = plt.subplots()
-    # # plt.plot(*bbox_raster.exterior.xy, color="red");
-    # # plt.plot(*bbox_pol.exterior.xy, color="blue"); plt.show()
+    # gdf_pol = gdf_img_polys.iloc[[0]]
+    minx, maxx, miny, maxy = float(pol_deg.bounds.minx.iloc[0]), float(
+        pol_deg.bounds.maxx.iloc[0]), float(pol_deg.bounds.miny.iloc[0]), float(pol_deg.bounds.maxy.iloc[0])
+    minx -= marg_exp
+    maxx += marg_exp
+    miny -= marg_exp
+    maxy += marg_exp
 
-    # # Cria um GeoPandas DataFrame com o bbox, georreferenciado pelo mesmo CRS
-    # gdf_bbox = gpd.GeoDataFrame(gpd.GeoSeries(bbox_pol), columns=[
-    #     'geometry'], crs=tiff16.crs)
-    # # Captura todos os polígonos que intersectam com o bbox do polígono sendo analisado
-    # warnings.filterwarnings('error')
-    # inters_check = "OK"
-    # try:
-    #     gdf_all_inside_bbox = gpd.overlay(
-    #         gdf_img_polys, gdf_bbox, how='intersection', keep_geom_type=True, make_valid=True)
-    # except:
-    #     inters_check = "FAIL"
-    #     warnings.resetwarnings()
-    #     gdf_all_inside_bbox = gpd.overlay(
-    #         gdf_img_polys, gdf_bbox, how='intersection', keep_geom_type=True, make_valid=True)
-    #     if matched:
-    #         return ()
-    # warnings.resetwarnings()
+    gdf_coords = gpd.GeoDataFrame(
+        {'geometry':
+            Polygon([(minx, maxy), (maxx, maxy), (maxx, miny), (minx, miny), (minx, maxy)])},
+        index=[0], crs=tiff16.crs)
+    # https://automating-gis-processes.github.io/CSC/notebooks/L5/clipping-raster.html
+    coords = [json.loads(gdf_coords.to_json())
+              ['features'][0]['geometry']]
 
-    # # list([gdf_img_polys.iloc[[x, ]].intersects(gdf_bbox, align=False)
-    # #     for x in range(len(gdf_img_polys))])
+    # Clipping the bbox area
+    nodata = np.nan
+    out_img, out_transform = mask(
+        dataset=tiff16, shapes=coords, crop=True, nodata=nodata)
 
-    # """
-    # gdf_img_polys.iloc[[1, ]].total_bounds
-    # gdf_bbox.total_bounds
-    # gdf_bbox.plot(); gdf_pol_deg.plot(); plt.show()
-    # """
+    out_meta = tiff16.meta.copy()
+    # epsg_code = int(tiff.crs.data['init'][5:])
+    out_meta.update({"driver": "GTiff",
+                    "height": out_img.shape[1],
+                     "width": out_img.shape[2],
+                     "transform": out_transform,
+                     # pycrs.parse.from_epsg_code(epsg_code).to_proj4()}
+                     "crs": tiff16.crs.data}
+                    )
+    with rasterio.open("Clipped16.tiff", "w", **out_meta) as dest:
+        dest.write(out_img)
 
-    # # Retorna MaskedArray e máscara da parte de fora dos polígonos dentro do bbox
-    # masked_fg, _ = Fun.get_masked_array_from_vector(
-    #     tiff16, gdf_all_inside_bbox.geometry, filled=False, crop=True, invert=False)
-    # # Plota feições originais e fundo mascarado
-    # # plt.imshow(masked[0, :, :], cmap='Greys'); plt.show()
-    # masked_ori = masked_fg.copy()  # Inverte manualmente as máscaras
-    # masked_fg.mask = ~masked_fg.mask  # Inverte manualmente as máscaras
-    # # masked.shape
-    # # gdf_bbox.total_bounds
-    # # gdf_all_inside_bbox.total_bounds
-    # """
-    # # Plota feições mascaradas e fundo original
-    # fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
-    # ax1.imshow(masked.data[0, :, :], cmap='Greys'); plt.set_title("Data")
-    # ax2.imshow(masked_ori[0, :, :], cmap='Greys'); plt.set_title("Ori Mask")
-    # ax3.imshow(masked.mask[0, :, :], cmap='Greys'); plt.set_title("Inv Mask")
-    # plt.show()
-    # """
-    # if plot:
-    #     # Plota o polígono e bbox para todos
-    #     fig, axs = plt.subplots(2, 3, figsize=(20, 10))  # nopep8
-    #     # rasterplot.show(tiff16, ax=ax, title='TIFF')
-    #     gdf_img_polys.plot(ax=axs[0, 0], color="blue")
-    #     gdf_bbox.plot(ax=axs[0, 0], facecolor="none", edgecolor='red')
-    #     exp_deg = 0.0015
-    #     axs[0, 0].set_xlim(
-    #         gdf_all_inside_bbox.total_bounds[0]-exp_deg, gdf_all_inside_bbox.total_bounds[2]+exp_deg)
-    #     axs[0, 0].set_ylim(
-    #         gdf_all_inside_bbox.total_bounds[1]-exp_deg, gdf_all_inside_bbox.total_bounds[3]+exp_deg)
-    #     axs[0, 0].set_title("Bbox exp")
+    clipped = rasterio.open("Clipped16.tiff")
+    assert clipped.shape == out_img[0].shape
+    # rasterplot.show(clipped, cmap="gray")
 
-    #     i01 = gdf_all_inside_bbox.plot(ax=axs[0, 1], color="green")
-    #     axs[0, 1].set_title("Bbox")
-    #     # fig.colorbar(i01, ax=axs[0, 1])
+    # Gets only the ocean
+    masked_pol, _ = FunDiv.get_masked_array_from_vector(
+        clipped, gdf_img_polys.geometry, filled=False, crop=False, invert=True)
 
-    #     i02 = axs[0, 2].imshow(masked_ori[0, :, :])
-    #     axs[0, 2].set_title(f"Masked Data Ori {masked_ori[0, :, :].shape}")
-    #     fig.colorbar(i02, ax=axs[0, 2])
+    dict_out = {}
+    try:
+        dict_out["OUT_STD"] = float(np.ma.std(masked_pol))
+    except:
+        dict_out["OUT_STD"] = None
+    try:
+        dict_out["OUT_MIN"] = float(np.ma.min(masked_pol))
+    except:
+        dict_out["OUT_MIN"] = None
+    try:
+        dict_out["OUT_MAX"] = float(np.ma.max(masked_pol))
+    except:
+        dict_out["OUT_MAX"] = None
+    try:
+        dict_out["OUT_MEAN"] = float(np.ma.mean(masked_pol))
+    except:
+        dict_out["OUT_MEAN"] = None
+    try:
+        dict_out["OUT_MEDIAN"] = float(np.ma.median(masked_pol))
+    except:
+        dict_out["OUT_MEDIAN"] = None
+    try:
+        dict_out["OUT_VAR_COEF"] = float(
+            np.ma.std(masked_pol) / np.ma.mean(masked_pol))
+    except:
+        dict_out["OUT_VAR_COEF"] = None
 
-    #     i10 = axs[1, 0].imshow(masked_fg[0, :, :])
-    #     axs[1, 0].set_title(f"Masked Data Inv {masked_fg[0, :, :].shape}")
-    #     fig.colorbar(i10, ax=axs[1, 0])
-
-    #     i11 = axs[1, 1].imshow(masked_ori.mask[0, :, :], cmap='Greys')
-    #     axs[1, 1].set_title(f"Ori Mask {masked_ori.mask[0, :, :].shape}")
-    #     fig.colorbar(i11, ax=axs[1, 1])
-
-    #     i12 = axs[1, 2].imshow(masked_fg.mask[0, :, :], cmap='Greys')
-    #     axs[1, 2].set_title(f"Inv Mask {masked_fg.mask[0, :, :].shape}")
-    #     fig.colorbar(i12, ax=axs[1, 2])
-    #     # plt.show()
-    #     fname_img = f"./img{os.sep}{inters_check}_IDX_IMG-{pol_deg.Id.iloc[0]}_IDX_MPOLY-{
-    #         pol_deg.index[0][0]}_IDX_POLY-{pol_deg.index[0][1]}.png"
-    #     plt.savefig(fname_img)
-    #     plt.close()
-    #     # print(fname_img)
-
-    # if not masked_fg.mask.all():
-    #     dict_ret["BG_STD"] = np.ma.std(masked_fg)
-    #     dict_ret["BG_VAR"] = np.ma.var(masked_fg)
-    #     dict_ret["BG_MIN"] = np.ma.min(masked_fg)
-    #     dict_ret["BG_MAX"] = np.ma.max(masked_fg)
-    #     dict_ret["BG_MEAN"] = np.ma.mean(masked_fg)
-    #     dict_ret["BG_MEDIAN"] = np.ma.median(masked_fg)
-    #     dict_ret["BG_VAR_COEF"] = dict_ret["BG_STD"] / dict_ret["BG_MEAN"]
-    #     dict_ret["FG_DARK_INTENS"] = dict_ret["BG_MEAN"] - dict_ret["FG_MEAN"]
-
-    #     # "FG_BG_THRES", "FG_BG_MAX_CONTRAST", "POWER_MEAN_RATIO", "FG_BG_MEAN_CONTRAST_RATIO",
-    #     # Gradientes e Bordas (Considerar somente o contorno????)
-    #     # "BORDER_GRAD_STD", "BORDER_GRAD_MEAN", "BORDER_GRAD_MAX"]
-    # return (dict_in)
+    return (dict_in | dict_out)

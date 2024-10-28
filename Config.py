@@ -3,11 +3,14 @@ from glob import glob
 import os
 import re
 import pandas as pd
+import numpy as np
 
 # A cross-platform way to get the home directory
 home = expanduser("~")
+marg_exp = 0.0005
 
 pd.set_option("display.max_columns", 1000)
+np.set_printoptions(suppress=True)
 
 dir_img = "./img"
 os.makedirs(dir_img, exist_ok=True)
@@ -20,8 +23,8 @@ fname_vetores = f"{
     dir_ds}/Vetores/Oil_slick/OilSlicks_Cantarell_GEOG_18052022_01.shp"
 
 # Captura todas as imagens dos diretórios
-fnames_img8 = sorted(glob.glob(f"{dir_tif8}/*_8b.tif"))
-fnames_img16 = sorted(glob.glob(f"{dir_tif16}/*_NR_Orb_Cal_TC.tif"))
+fnames_img8 = sorted(glob(f"{dir_tif8}/*_8b.tif"))
+fnames_img16 = sorted(glob(f"{dir_tif16}/*_NR_Orb_Cal_TC.tif"))
 
 # Filtra somente Sentinel-1
 # Lista devem ter mesmo tamanho, relação 1:1 (8bits:16bits)
