@@ -2,9 +2,9 @@ from skimage.feature import graycomatrix, graycoprops
 from matplotlib import pyplot as plt
 import numpy as np
 import importlib
-
 import FunDiv
 from Config import *
+import warnings
 
 importlib.reload(FunDiv)
 
@@ -14,6 +14,7 @@ importlib.reload(FunDiv)
 
 
 def get_texture_features(pol_deg, tiff8):
+    warnings.filterwarnings('error')
     # pol_deg = gdf_pol.geometry
 
     nodata = 256.   # 256.0 | np.nan
@@ -41,7 +42,10 @@ def get_texture_features(pol_deg, tiff8):
         levels = max_value + 1
         glcm = graycomatrix(ma2d, distances=[1], angles=[
                             0], levels=levels, symmetric=True, normed=True)
+
         glcm_normalized = glcm / np.sum(glcm)
+        # if float(np.sum(glcm)) != 0.0:
+        #    return (dict_text)
 
         try:
             dict_text["TEXT_CONTR_GLCM"] = float(
@@ -82,8 +86,7 @@ def get_texture_features(pol_deg, tiff8):
         except:
             pass
     except:
-        print("\nma2d\n", ma2d, flush=True)
-        print("\nglcm\n", glcm, flush=True)
         pass
 
+    warnings.filterwarnings('default')
     return (dict_text)

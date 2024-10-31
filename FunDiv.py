@@ -7,6 +7,15 @@ from rasterio.mask import mask
 from sklearn.preprocessing import MinMaxScaler
 
 
+def get_xy_from_lonlat(tiff16):
+    hei, wid = tiff16.shape
+    left, bottom, right, top = tiff16.bounds
+
+    len_lon = right-left
+    step_lon = len_lon / wid
+    step_pix = wid / len_lon
+
+
 def scaler(ma2d, a=0, b=1):
     data = ma2d.ravel().reshape(-1, 1)
     scaler = MinMaxScaler((a, b))
@@ -15,7 +24,7 @@ def scaler(ma2d, a=0, b=1):
 
 
 def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, invert=False, nodata=np.nan):
-    # raster=tiff16; vectors=gdf_pol_deg.geometry; filled=False; crop=True; invert=False
+    # raster=tiff16; vectors=pol_deg = gdf_pol.geometry; filled=False; crop=True; invert=False; nodata=np.nan
     """
     Do the clip operation (creates a MaskedArray with the polygon only)
     Pixels are masked or set to nodata outside the input shapes, unless
@@ -28,7 +37,8 @@ def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, inver
     """
     # Cria o masked array ou array
     masked_array, transform = mask(
-        raster, vectors, filled=filled, crop=crop, invert=invert, nodata=nodata)
+        raster, vectors, filled=filled, crop=crop, invert=invert, nodata=nodata, pad=True)
+
     """
     When you operate on masked arrays, it takes the union of the masks involved in the operation.
     The package ensures that masked entries are not used in computations.
@@ -68,10 +78,9 @@ def get_masked_array_from_vector(raster, vectors, filled=False, crop=True, inver
 
 
 def get_centroid(pol_deg):
+    # pol_deg = gdf_pol.geometry
     # https://gis.stackexchange.com/questions/372564/userwarning-when-trying-to-get-centroid-from-a-polygon-geopandas
     # CRS = 3857 (meters) | 4326 (degress, WGS84)
-
-    # pol_deg = gdf_pol.geometry
     # ---------------------------------------------------------------------
     # 1) METHOD default for centroid estipulation
     # A warning raises but, at the end, calculated area and perim values

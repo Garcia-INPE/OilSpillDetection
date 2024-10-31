@@ -34,12 +34,11 @@ def get_huMomentun(pol_m):
             math.copysign(1.0, huMoments[i][0]) * \
             math.log10(abs(huMoments[i][0]))
     os.remove(fname)
-
     return {f"SHP_HU_MOM{(i+1)}": float(x[0]) for i, x in enumerate(huMoments)}
 
 
 def get_shape_features(pol_deg, plot_pol=False):
-
+    # pol_deg = gdf_img_polys.iloc[[0]]
     # In order to calculate area and perimeter we need to reproject the polygon in a equal-area
     # projection, like in meters, but using a fixed CRS is not correct because the projection wont't be so
     # precise is everywhare. We need to calculate the correct UTM

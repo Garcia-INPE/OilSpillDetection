@@ -22,6 +22,7 @@ importlib.reload(FunDiv)
 
 def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     # pol_deg = gdf_pol.geometry
+    warnings.filterwarnings('error')
 
     # -----------------------------------------------------------------------
     # Part 1) Statistics from inside of the polygon
@@ -29,8 +30,10 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     # Gets only the polygon
     masked_pol, _ = FunDiv.get_masked_array_from_vector(
         tiff16, pol_deg.geometry, filled=False, crop=True, invert=False)
+
     # Check it by plotting it
     # plt.imshow(masked_pol[0, :, :]); plt.show()
+    # pol_deg.plot(); plt.show()
 
     # Checa se todos os valores da máscara são True
     # Que significa que todos estão escondidos (mascarado)
@@ -41,7 +44,9 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
                "IN_MAX": float(np.ma.max(masked_pol)),
                "IN_MEAN": float(np.ma.mean(masked_pol)),
                "IN_MEDIAN": float(np.ma.median(masked_pol)),
-               "IN_VAR_COEF": float(np.ma.std(masked_pol) / np.ma.mean(masked_pol))}
+               "IN_VAR_COEF": float(np.ma.std(masked_pol) / np.ma.mean(masked_pol)),
+               "IN_NUM_PIXELS ": int(np.sum(~masked_pol.mask))}
+    # Soma os Falses, valores não mascarados
 
     # -----------------------------------------------------------------------
     # Part 2) Statistics of the ocean outside the polygon being analysed
@@ -50,7 +55,7 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     # Intuition: save the expanded bbox as tiff and clip it with the
     # gdf of all polygons
     # -----------------------------------------------------------------------
-    # gdf_pol = gdf_img_polys.iloc[[0]]
+    # pol_deg = gdf_pol.geometry
     minx, maxx, miny, maxy = float(pol_deg.bounds.minx.iloc[0]), float(
         pol_deg.bounds.maxx.iloc[0]), float(pol_deg.bounds.miny.iloc[0]), float(pol_deg.bounds.maxy.iloc[0])
     minx -= marg_exp
@@ -118,4 +123,5 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     except:
         dict_out["OUT_VAR_COEF"] = None
 
+    warnings.filterwarnings('error')
     return (dict_in | dict_out)
