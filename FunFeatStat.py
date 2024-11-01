@@ -16,6 +16,7 @@ import numpy as np
 import FunDiv
 from Config import *
 marg_exp = 0.0005
+np.set_printoptions(suppress=True)
 
 importlib.reload(FunDiv)
 

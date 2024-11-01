@@ -6,14 +6,64 @@ import numpy as np
 from rasterio.mask import mask
 from sklearn.preprocessing import MinMaxScaler
 
+np.set_printoptions(suppress=True)
 
-def get_xy_from_lonlat(tiff16):
-    hei, wid = tiff16.shape
-    left, bottom, right, top = tiff16.bounds
 
-    len_lon = right-left
-    step_lon = len_lon / wid
-    step_pix = wid / len_lon
+def get_x_from_lon(raster, lon, corner):
+    # raster=tiff16; lat=float(gdf_pol.bounds.maxx.iloc[0]); corner=2
+
+    wid = raster.shape[1]
+    left, right = raster.bounds.left, raster.bounds.right
+
+    len_lon = abs(left-right)    # Distance of the raster in lon
+    step_pixx = wid / len_lon    # Pixels for each degree in x (lon)
+
+    dist_lon = abs(left - lon)   # Distance from left (in lon)
+    # Corner 1: Botton-left corner
+    if corner == 1:
+        x = int(step_pixx * dist_lon)  # Idem (in px)
+    # Corner 2: Top-right corner
+    if corner == 2:
+        x = int(step_pixx * dist_lon)  # Idem (in px)
+    return (x)
+
+
+def get_y_from_lat(raster, lat, corner):
+    # raster=tiff16; lat=float(gdf_pol.bounds.maxy.iloc[0])
+
+    hei = raster.shape[0]
+    bottom, top = raster.bounds.bottom, raster.bounds.top
+
+    len_lat = abs(top-bottom)    # Distance of the raster in lat
+    step_pixy = hei / len_lat    # Pixels for each degree in y (lat)
+
+    dist_lat = abs(bottom - lat)       # Distance from bottom (in lat)
+    # Corner 1: Botton-left corner
+    if corner == 1:
+        y = int(step_pixy * dist_lat)  # Idem (in px)
+    # Corner 2: Top-right corner
+    if corner == 2:
+        y = int(step_pixy * dist_lat)  # Idem (in px)
+    return (y)
+
+
+# Testing
+x1 = get_x_from_lon(tiff16, float(gdf_pol.bounds.minx.iloc[0]), 1)
+y1 = get_y_from_lat(tiff16, float(gdf_pol.bounds.miny.iloc[0]), 1)
+x2 = get_x_from_lon(tiff16, float(gdf_pol.bounds.maxx.iloc[0]), 2)
+y2 = get_y_from_lat(tiff16, float(gdf_pol.bounds.maxy.iloc[0]), 2)
+x1, x2, y1, y2
+tiff16.read()[x1:(x2+1), y1:(y2+1)]
+
+# gdf_pol.bounds
+# get_xy_from_lonlat(tiff16,
+#                    float(gdf_pol.bounds.minx.iloc[0]), float(
+#                        gdf_pol.bounds.miny.iloc[0]),
+#                    float(gdf_pol.bounds.maxx.iloc[0]), float(gdf_pol.bounds.maxy.iloc[0]))
+# resx = abs(float(pol_deg.bounds.maxx.iloc[0]-pol_deg.bounds.minx.iloc[0]))
+# f'{resx:.20f}'
+# resy = abs(float(pol_deg.bounds.maxy.iloc[0]-pol_deg.bounds.miny.iloc[0]))
+# f'{resy:.20f}'
 
 
 def scaler(ma2d, a=0, b=1):
