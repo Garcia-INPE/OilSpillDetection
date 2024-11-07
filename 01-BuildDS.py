@@ -20,6 +20,7 @@ importlib.reload(FunPlot)
 # pd.set_option("display.max_columns", 1000)
 
 vetores = gpd.read_file(fname_vetores)
+# vetores.crs
 # Nomes das imagens TIF do diretório
 
 idx_img = 0

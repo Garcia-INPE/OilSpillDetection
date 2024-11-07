@@ -1,3 +1,4 @@
+import utm
 import os
 import re
 import math
@@ -47,23 +48,15 @@ def get_y_from_lat(raster, lat, corner):
     return (y)
 
 
-# Testing
-x1 = get_x_from_lon(tiff16, float(gdf_pol.bounds.minx.iloc[0]), 1)
-y1 = get_y_from_lat(tiff16, float(gdf_pol.bounds.miny.iloc[0]), 1)
-x2 = get_x_from_lon(tiff16, float(gdf_pol.bounds.maxx.iloc[0]), 2)
-y2 = get_y_from_lat(tiff16, float(gdf_pol.bounds.maxy.iloc[0]), 2)
-x1, x2, y1, y2
-tiff16.read()[x1:(x2+1), y1:(y2+1)]
-
-# gdf_pol.bounds
-# get_xy_from_lonlat(tiff16,
-#                    float(gdf_pol.bounds.minx.iloc[0]), float(
-#                        gdf_pol.bounds.miny.iloc[0]),
-#                    float(gdf_pol.bounds.maxx.iloc[0]), float(gdf_pol.bounds.maxy.iloc[0]))
-# resx = abs(float(pol_deg.bounds.maxx.iloc[0]-pol_deg.bounds.minx.iloc[0]))
-# f'{resx:.20f}'
-# resy = abs(float(pol_deg.bounds.maxy.iloc[0]-pol_deg.bounds.miny.iloc[0]))
-# f'{resy:.20f}'
+def get_img_xy_from_latlon(raster, ptLat, ptLon):
+    # raster = tiff16
+    # https://stackoverflow.com/questions/2282477/mapping-latitude-and-longitude-values-onto-an-image?rq=3
+    rasterWid = raster.read()[0].shape[1]
+    rasterHei = raster.read()[0].shape[0]
+    rasLon1, rasLon2, rasLat1, rasLat2 = raster.bounds.left, raster.bounds.right, raster.bounds.bottom, raster.bounds.top
+    x = rasterWid * (ptLon - rasLon1) / (rasLon2 - rasLon1)
+    y = rasterHei * (1 - (ptLat - rasLat1) / (rasLat2 - rasLat1))
+    return (x, y)
 
 
 def scaler(ma2d, a=0, b=1):

@@ -30,7 +30,7 @@ def get_stat_features(gdf_img_polys, pol_deg, tiff16, plot=False):
     # -----------------------------------------------------------------------
     # Gets only the polygon
     masked_pol, _ = FunDiv.get_masked_array_from_vector(
-        tiff16, pol_deg.geometry, filled=False, crop=True, invert=False)
+        tiff16, pol_deg.geometry, filled=True, crop=True, invert=True)
 
     # Check it by plotting it
     # plt.imshow(masked_pol[0, :, :]); plt.show()
