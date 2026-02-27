@@ -1,0 +1,182 @@
+Oil Spill Classification
+Sudhanshu Rastogi · Updated 3 years ago
+Usability 9.4 · 1 File (CSV) · 79 kB · 4,438 downloads · 24 notebooks
+90
+ Silver
+Oil Spills
+Mohamadreza Momeni · Updated 2 years ago
+Usability 10.0 · 6 Files (CSV) · 2 kB · 678 downloads · 2 notebooks
+103
+ Silver
+Oil Spill
+Ashraf Khan · Updated 5 years ago
+Usability 5.9 · 1 File (CSV) · 79 kB · 2,058 downloads · 1 notebook
+26
+Oil spillage data
+Chirag Chauhan · Updated 3 years ago
+Usability 10.0 · 1 File (CSV) · 10 kB · 789 downloads · 2 notebooks
+30
+ Silver
+oil-spill
+Nabil Sherif · Updated 2 years ago
+Usability 1.9 · 2224 Files (other) · 397 MB · 1,073 downloads · 13 notebooks
+11
+Oil Pipeline Accidents, 2010-Present
+Department of Transportation · Updated 9 years ago
+Usability 8.2 · 1 File (CSV) · 208 kB · 9,583 downloads · 48 notebooks
+156
+ Bronze
+Oil Spill Incidents Dataset
+Anoop Johny · Updated 2 years ago
+Usability 10.0 · 1 File (CSV) · 21 MB · 337 downloads · 1 notebook
+11
+Oil spills off US coastal waters
+koustubhk · Updated 4 years ago
+Usability 10.0 · 1 File (CSV) · 957 kB · 665 downloads · 1 notebook
+24
+ Bronze
+Texas oil and gas industry water spills 2013-2022
+Sujay Kapadnis · Updated 2 years ago
+Usability 10.0 · 2 Files (CSV) · 2 MB · 736 downloads · 1 notebook
+23
+ Bronze
+Oil Spills
+willian oliveira · Updated 2 years ago
+Usability 10.0 · 1 File (CSV) · 394 B · 102 downloads · 1 notebook
+6
+Spill_Data
+Damingo Levi · Updated 7 years ago
+Usability 5.6 · 412 Files (other) · 12 MB · 582 downloads · 4 notebooks
+17
+Global Oil Spills Data from 1970-2023
+Nafay Un Noor · Updated a year ago
+Usability 9.4 · 1 File (CSV) · 534 B · 123 downloads
+14
+Oil Spill Dataset
+Paul Holdsworth · Updated 5 years ago
+Usability 4.7 · 1 File (CSV) · 79 kB · 201 downloads · 1 notebook
+4
+Oil Pipeline Spill Analysis
+Saurabh · Updated 6 years ago
+Usability 2.9 · 1 File (CSV) · 206 kB · 278 downloads · 1 notebook
+6
+Mussel Watch
+Sohier Dane · Updated 8 years ago
+Usability 8.2 · 6 Files (CSV, other) · 10 MB · 1,511 downloads · 118 notebooks
+42
+Marine Oil Spill Detection
+Afzal Khan · Updated 10 months ago
+Usability 6.3 · 300 Files (other) · 59 MB · 206 downloads
+3
+Oil spill Dataset- Binary Image Classification
+vighnesh anand · Updated 4 years ago
+Usability 0.6 · 4000 Files (other) · 830 MB · 975 downloads · 25 notebooks
+4
+Oil Spill Detection — Binary Image Classification
+atif khan 89 · Updated 8 months ago
+Usability 6.9 · 247 Files (other) · 28 MB · 110 downloads
+3
+Oil Spill and No Oil Spill
+sin(V) · Updated 4 years ago
+Usability 0.0 · 247 Files (other) · 28 MB · 139 downloads
+7
+Oil Pipeline Accidents
+Oil Spill · Updated 10 months ago
+Usability 7.6 · 1 File (CSV) · 308 kB · 93 downloads
+1
+oil spill
+youssef ahmed · Updated a month ago
+Usability 3.1 · 19225 Files (other) · 496 MB · 1 notebook
+0
+Oil Spill
+Aahan Mehra · Updated 4 years ago
+Usability 1.2 · 1 File (CSV) · 79 kB · 27 downloads
+1
+oil spill
+Sanika Kulkarni · Updated a year ago
+Usability 1.9 · 2224 Files (other) · 397 MB · 26 downloads · 1 notebook
+0
+Oil Spills Image Data
+@mlengineer · Updated 4 years ago
+Usability 1.3 · 433 Files (other) · 9 MB · 120 downloads
+3
+Oil Spills
+Amirhossein Jafarnezhad · Updated 3 months ago
+Usability 7.1 · 6 Files (CSV) · 2 kB · 5 downloads
+0
+oil-spill
+kareemkhalill_ · Updated 8 months ago
+Usability 2.5 · 2400 Files (other) · 2 GB · 13 downloads
+0
+Hyperspectral oil spill detection dataset
+Sangam Kumar · Updated 3 years ago
+Usability 0.0 · 18 Files (other) · 2 GB · 107 downloads
+3
+Sentinel-1 SAR Oil Spill Detection Dataset
+harikrishnacs · Updated a month ago
+Usability 8.1 · 5643 Files (other) · 68 MB · 5 downloads
+0
+oil spill
+Laven Srivastava · Updated a year ago
+Usability 1.3 · 2537 Files (other) · 1 GB · 40 downloads
+0
+Three Gorges Oil Spill Data
+wendy vane · Updated 3 years ago
+Usability 1.2 · 2 Files (CSV) · 2 kB · 16 downloads
+1
+oil-spill-raw-segmentation
+Sagda Esmat Alsawy · Updated a month ago
+Usability 1.9 · 6781 Files (other, CSV) · 149 MB · 1 notebook
+0
+Oil spill Infrared
+Thadzy · Updated a year ago
+Usability 1.9 · 4522 Files (other) · 351 MB · 8 downloads
+0
+oil spill data
+AadeshMishra2006 · Updated a month ago
+Usability 1.3 · 3337 Files (other) · 403 MB
+0
+MADOS (Marine Debris and Oil Spill)
+Kaushal Maniyar · Updated 3 months ago
+Usability 4.1 · 3 Files (CSV) · 44 MB · 15 downloads
+0
+Patents Number per country, worldwide
+Antonis Prodromou · Updated 3 years ago
+Usability 5.3 · 1 File (CSV) · 958 kB · 140 downloads · 1 notebook
+1
+Road Accident Data Analysis using Microsoft Excel.
+Lakshmi Pragna Kollu · Updated 2 years ago
+Usability 5.3 · 1 File (other) · 53 MB · 314 downloads
+4
+Road Accident Dataset
+Ravi Tiwari RT · Updated a year ago
+Usability 4.1 · 1 File (CSV) · 7 MB · 123 downloads
+0
+Oil_Spill_Detection_Dataset
+Nilay Sasturkar · Updated a month ago
+Usability 1.3 · 6682 Files (other) · 404 MB
+0
+HSI_Complete
+A.Venkat Sri Harsha · Updated 9 months ago
+Usability 0.0 · 18 Files (other) · 2 GB · 17 downloads
+0
+Oil_spill_datasets
+Afinogentov Alexander · Updated a year ago
+Usability 1.9 · 307 Files (other) · 53 MB · 42 downloads · 2 notebooks
+0
+No_oil-spill
+kareemkhalill_ · Updated 7 months ago
+Usability 2.5 · 1370 Files (other) · 1 GB · 1 download
+0
+Spill_Oil_RGB
+luthfiahmadamirulloh · Updated 6 months ago
+Usability 1.9 · 2537 Files (other) · 1 GB · 7 downloads
+0
+oil_spill_dataset
+Prashya Biju · Updated 5 months ago
+Usability 1.3 · 2537 Files (other) · 1 GB · 6 downloads
+0
+Overlayed_Oil_Spill
+Shantanu Dhar · Updated 6 months ago
+Usability 1.3 · 5630 Files (other) · 122 MB
+0
