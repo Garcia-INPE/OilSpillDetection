@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import argparse
 
@@ -6,8 +7,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-DEFAULT_SHP = Path("/home/jrmgarcia/ProjData/Oil_Spill/Cantarell_Beisl/Vetores/Oil_slick/OilSlicks_Cantarell_GEOG_18052022_01.shp")
-DEFAULT_OUTDIR = Path("dataout/EDA-Vectors")
+DEFAULT_SHP = Path(
+    os.environ.get(
+        "OIL_SPILL_SHP",
+        str(
+            Path.home()
+            / "ProjData"
+            / "Oil_Spill"
+            / "Cantarell_Beisl"
+            / "Vetores"
+            / "Oil_slick"
+            / "OilSlicks_Cantarell_GEOG_18052022_01.shp"
+        ),
+    )
+)
+DEFAULT_OUTDIR = Path("dataout/01-EDA-Vectors")
 
 
 def save_series(series: pd.Series, path: Path, index_name: str) -> None:

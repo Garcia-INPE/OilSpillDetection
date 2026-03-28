@@ -1,0 +1,2181 @@
+{
+  "images": {
+    "1": {
+      "n_polygons": 2,
+      "n_windows": 2,
+      "windows": {
+        "0": {
+          "row_off": 5825,
+          "col_off": 6033,
+          "indices": [
+            0
+          ],
+          "poly_ids": [
+            1
+          ]
+        },
+        "1": {
+          "row_off": 6285,
+          "col_off": 5096,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        }
+      }
+    },
+    "2": {
+      "n_polygons": 24,
+      "n_windows": 9,
+      "windows": {
+        "0": {
+          "row_off": 4595,
+          "col_off": 4190,
+          "indices": [
+            19,
+            20
+          ],
+          "poly_ids": [
+            20,
+            21
+          ]
+        },
+        "1": {
+          "row_off": 4827,
+          "col_off": 4990,
+          "indices": [
+            12,
+            13,
+            15,
+            16,
+            17,
+            18
+          ],
+          "poly_ids": [
+            13,
+            14,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "2": {
+          "row_off": 4900,
+          "col_off": 1229,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "3": {
+          "row_off": 5098,
+          "col_off": 6349,
+          "indices": [
+            23
+          ],
+          "poly_ids": [
+            24
+          ]
+        },
+        "4": {
+          "row_off": 5195,
+          "col_off": 4190,
+          "indices": [
+            11
+          ],
+          "poly_ids": [
+            12
+          ]
+        },
+        "5": {
+          "row_off": 5658,
+          "col_off": 5466,
+          "indices": [
+            21
+          ],
+          "poly_ids": [
+            22
+          ]
+        },
+        "6": {
+          "row_off": 5851,
+          "col_off": 6266,
+          "indices": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            22
+          ],
+          "poly_ids": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            23
+          ]
+        },
+        "7": {
+          "row_off": 6393,
+          "col_off": 5021,
+          "indices": [
+            8,
+            9,
+            10
+          ],
+          "poly_ids": [
+            9,
+            10,
+            11
+          ]
+        },
+        "8": {
+          "row_off": 6350,
+          "col_off": 753,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        }
+      }
+    },
+    "3": {
+      "n_polygons": 0,
+      "n_windows": 0,
+      "windows": {}
+    },
+    "4": {
+      "n_polygons": 28,
+      "n_windows": 13,
+      "windows": {
+        "0": {
+          "row_off": 3925,
+          "col_off": 7068,
+          "indices": [
+            27
+          ],
+          "poly_ids": [
+            28
+          ]
+        },
+        "1": {
+          "row_off": 4579,
+          "col_off": 5105,
+          "indices": [
+            13,
+            14,
+            15,
+            16
+          ],
+          "poly_ids": [
+            14,
+            15,
+            16,
+            17
+          ]
+        },
+        "2": {
+          "row_off": 4756,
+          "col_off": 1223,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "3": {
+          "row_off": 5265,
+          "col_off": 6578,
+          "indices": [
+            12
+          ],
+          "poly_ids": [
+            13
+          ]
+        },
+        "4": {
+          "row_off": 5412,
+          "col_off": 4383,
+          "indices": [
+            17
+          ],
+          "poly_ids": [
+            18
+          ]
+        },
+        "5": {
+          "row_off": 5865,
+          "col_off": 5778,
+          "indices": [
+            4,
+            6,
+            23,
+            24
+          ],
+          "poly_ids": [
+            5,
+            7,
+            24,
+            25
+          ]
+        },
+        "6": {
+          "row_off": 5865,
+          "col_off": 6578,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        },
+        "7": {
+          "row_off": 6178,
+          "col_off": 4978,
+          "indices": [
+            18,
+            19,
+            20,
+            21
+          ],
+          "poly_ids": [
+            19,
+            20,
+            21,
+            22
+          ]
+        },
+        "8": {
+          "row_off": 6302,
+          "col_off": 769,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        },
+        "9": {
+          "row_off": 6738,
+          "col_off": 2177,
+          "indices": [
+            3
+          ],
+          "poly_ids": [
+            4
+          ]
+        },
+        "10": {
+          "row_off": 7175,
+          "col_off": 6688,
+          "indices": [
+            26
+          ],
+          "poly_ids": [
+            27
+          ]
+        },
+        "11": {
+          "row_off": 8377,
+          "col_off": 2708,
+          "indices": [
+            25
+          ],
+          "poly_ids": [
+            26
+          ]
+        },
+        "12": {
+          "row_off": 5265,
+          "col_off": 5778,
+          "indices": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "poly_ids": [
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      }
+    },
+    "5": {
+      "n_polygons": 6,
+      "n_windows": 6,
+      "windows": {
+        "0": {
+          "row_off": 4777,
+          "col_off": 1282,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "1": {
+          "row_off": 5032,
+          "col_off": 5136,
+          "indices": [
+            4
+          ],
+          "poly_ids": [
+            5
+          ]
+        },
+        "2": {
+          "row_off": 5171,
+          "col_off": 5975,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        },
+        "3": {
+          "row_off": 5664,
+          "col_off": 5049,
+          "indices": [
+            3
+          ],
+          "poly_ids": [
+            4
+          ]
+        },
+        "4": {
+          "row_off": 5780,
+          "col_off": 5887,
+          "indices": [
+            0
+          ],
+          "poly_ids": [
+            1
+          ]
+        },
+        "5": {
+          "row_off": 6330,
+          "col_off": 785,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        }
+      }
+    },
+    "6": {
+      "n_polygons": 5,
+      "n_windows": 3,
+      "windows": {
+        "0": {
+          "row_off": 4848,
+          "col_off": 5089,
+          "indices": [
+            2,
+            4
+          ],
+          "poly_ids": [
+            3,
+            5
+          ]
+        },
+        "1": {
+          "row_off": 5798,
+          "col_off": 5964,
+          "indices": [
+            0,
+            1
+          ],
+          "poly_ids": [
+            1,
+            2
+          ]
+        },
+        "2": {
+          "row_off": 6200,
+          "col_off": 4987,
+          "indices": [
+            3
+          ],
+          "poly_ids": [
+            4
+          ]
+        }
+      }
+    },
+    "7": {
+      "n_polygons": 14,
+      "n_windows": 6,
+      "windows": {
+        "0": {
+          "row_off": 4084,
+          "col_off": 5787,
+          "indices": [
+            11
+          ],
+          "poly_ids": [
+            12
+          ]
+        },
+        "1": {
+          "row_off": 4846,
+          "col_off": 5150,
+          "indices": [
+            8,
+            9,
+            10
+          ],
+          "poly_ids": [
+            9,
+            10,
+            11
+          ]
+        },
+        "2": {
+          "row_off": 5051,
+          "col_off": 6210,
+          "indices": [
+            12
+          ],
+          "poly_ids": [
+            13
+          ]
+        },
+        "3": {
+          "row_off": 5592,
+          "col_off": 5834,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "poly_ids": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "4": {
+          "row_off": 6129,
+          "col_off": 5108,
+          "indices": [
+            6,
+            7
+          ],
+          "poly_ids": [
+            7,
+            8
+          ]
+        },
+        "5": {
+          "row_off": 6262,
+          "col_off": 6349,
+          "indices": [
+            13
+          ],
+          "poly_ids": [
+            14
+          ]
+        }
+      }
+    },
+    "8": {
+      "n_polygons": 1,
+      "n_windows": 2,
+      "windows": {
+        "0": {
+          "row_off": 7967,
+          "col_off": 2061,
+          "indices": [],
+          "poly_ids": []
+        },
+        "1": {
+          "row_off": 8567,
+          "col_off": 2455,
+          "indices": [],
+          "poly_ids": []
+        }
+      }
+    },
+    "9": {
+      "n_polygons": 50,
+      "n_windows": 17,
+      "windows": {
+        "0": {
+          "row_off": 4872,
+          "col_off": 4722,
+          "indices": [
+            32,
+            35,
+            36,
+            45,
+            46,
+            47,
+            48
+          ],
+          "poly_ids": [
+            33,
+            36,
+            37,
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        "1": {
+          "row_off": 4869,
+          "col_off": 5522,
+          "indices": [
+            39,
+            40,
+            44
+          ],
+          "poly_ids": [
+            40,
+            41,
+            45
+          ]
+        },
+        "2": {
+          "row_off": 5269,
+          "col_off": 6322,
+          "indices": [
+            19,
+            20,
+            24
+          ],
+          "poly_ids": [
+            20,
+            21,
+            25
+          ]
+        },
+        "3": {
+          "row_off": 5469,
+          "col_off": 5522,
+          "indices": [
+            22,
+            23,
+            25,
+            26,
+            28,
+            29
+          ],
+          "poly_ids": [
+            23,
+            24,
+            26,
+            27,
+            29,
+            30
+          ]
+        },
+        "4": {
+          "row_off": 7098,
+          "col_off": 4796,
+          "indices": [
+            9,
+            10
+          ],
+          "poly_ids": [
+            10,
+            11
+          ]
+        },
+        "5": {
+          "row_off": 8129,
+          "col_off": 1241,
+          "indices": [
+            16
+          ],
+          "poly_ids": [
+            17
+          ]
+        },
+        "6": {
+          "row_off": 8595,
+          "col_off": 2543,
+          "indices": [
+            11,
+            12,
+            13
+          ],
+          "poly_ids": [
+            12,
+            13,
+            14
+          ]
+        },
+        "7": {
+          "row_off": 7471,
+          "col_off": 1573,
+          "indices": [
+            1,
+            17
+          ],
+          "poly_ids": [
+            2,
+            18
+          ]
+        },
+        "8": {
+          "row_off": 4714,
+          "col_off": 3922,
+          "indices": [
+            34
+          ],
+          "poly_ids": [
+            35
+          ]
+        },
+        "9": {
+          "row_off": 4872,
+          "col_off": 5522,
+          "indices": [
+            39,
+            40,
+            44
+          ],
+          "poly_ids": [
+            40,
+            41,
+            45
+          ]
+        },
+        "10": {
+          "row_off": 4269,
+          "col_off": 5522,
+          "indices": [],
+          "poly_ids": []
+        },
+        "11": {
+          "row_off": 7995,
+          "col_off": 2728,
+          "indices": [
+            14,
+            15
+          ],
+          "poly_ids": [
+            15,
+            16
+          ]
+        },
+        "12": {
+          "row_off": 6509,
+          "col_off": 3922,
+          "indices": [
+            49
+          ],
+          "poly_ids": [
+            50
+          ]
+        },
+        "13": {
+          "row_off": 6364,
+          "col_off": 4722,
+          "indices": [
+            6,
+            7,
+            8
+          ],
+          "poly_ids": [
+            7,
+            8,
+            9
+          ]
+        },
+        "14": {
+          "row_off": 6069,
+          "col_off": 5522,
+          "indices": [],
+          "poly_ids": []
+        },
+        "15": {
+          "row_off": 5869,
+          "col_off": 6322,
+          "indices": [
+            4
+          ],
+          "poly_ids": [
+            5
+          ]
+        },
+        "16": {
+          "row_off": 6509,
+          "col_off": 3122,
+          "indices": [],
+          "poly_ids": []
+        }
+      }
+    },
+    "10": {
+      "n_polygons": 11,
+      "n_windows": 6,
+      "windows": {
+        "0": {
+          "row_off": 4420,
+          "col_off": 5291,
+          "indices": [
+            2,
+            8
+          ],
+          "poly_ids": [
+            3,
+            9
+          ]
+        },
+        "1": {
+          "row_off": 4420,
+          "col_off": 6091,
+          "indices": [],
+          "poly_ids": []
+        },
+        "2": {
+          "row_off": 5020,
+          "col_off": 5291,
+          "indices": [],
+          "poly_ids": []
+        },
+        "3": {
+          "row_off": 5020,
+          "col_off": 6091,
+          "indices": [
+            6,
+            9
+          ],
+          "poly_ids": [
+            7,
+            10
+          ]
+        },
+        "4": {
+          "row_off": 5620,
+          "col_off": 6091,
+          "indices": [
+            3,
+            4,
+            5,
+            10
+          ],
+          "poly_ids": [
+            4,
+            5,
+            6,
+            11
+          ]
+        },
+        "5": {
+          "row_off": 6294,
+          "col_off": 837,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        }
+      }
+    },
+    "11": {
+      "n_polygons": 2,
+      "n_windows": 2,
+      "windows": {
+        "0": {
+          "row_off": 7400,
+          "col_off": 6458,
+          "indices": [
+            0
+          ],
+          "poly_ids": [
+            1
+          ]
+        },
+        "1": {
+          "row_off": 7814,
+          "col_off": 5573,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        }
+      }
+    },
+    "12": {
+      "n_polygons": 40,
+      "n_windows": 14,
+      "windows": {
+        "0": {
+          "row_off": 6922,
+          "col_off": 6724,
+          "indices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            19
+          ],
+          "poly_ids": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            20
+          ]
+        },
+        "1": {
+          "row_off": 6922,
+          "col_off": 5924,
+          "indices": [
+            18,
+            39
+          ],
+          "poly_ids": [
+            19,
+            40
+          ]
+        },
+        "2": {
+          "row_off": 7316,
+          "col_off": 4665,
+          "indices": [
+            37,
+            38
+          ],
+          "poly_ids": [
+            38,
+            39
+          ]
+        },
+        "3": {
+          "row_off": 7522,
+          "col_off": 6724,
+          "indices": [
+            16
+          ],
+          "poly_ids": [
+            17
+          ]
+        },
+        "4": {
+          "row_off": 8106,
+          "col_off": 5412,
+          "indices": [
+            20,
+            21,
+            22,
+            23,
+            24
+          ],
+          "poly_ids": [
+            21,
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        "5": {
+          "row_off": 8072,
+          "col_off": 908,
+          "indices": [
+            1,
+            35
+          ],
+          "poly_ids": [
+            2,
+            36
+          ]
+        },
+        "6": {
+          "row_off": 8444,
+          "col_off": 4150,
+          "indices": [
+            27,
+            28,
+            34
+          ],
+          "poly_ids": [
+            28,
+            29,
+            35
+          ]
+        },
+        "7": {
+          "row_off": 8717,
+          "col_off": 1172,
+          "indices": [
+            31
+          ],
+          "poly_ids": [
+            32
+          ]
+        },
+        "8": {
+          "row_off": 8717,
+          "col_off": 1972,
+          "indices": [
+            32
+          ],
+          "poly_ids": [
+            33
+          ]
+        },
+        "9": {
+          "row_off": 8795,
+          "col_off": 5017,
+          "indices": [
+            25,
+            26
+          ],
+          "poly_ids": [
+            26,
+            27
+          ]
+        },
+        "10": {
+          "row_off": 9842,
+          "col_off": 2830,
+          "indices": [
+            29,
+            30,
+            36
+          ],
+          "poly_ids": [
+            30,
+            31,
+            37
+          ]
+        },
+        "11": {
+          "row_off": 7522,
+          "col_off": 5924,
+          "indices": [],
+          "poly_ids": []
+        },
+        "12": {
+          "row_off": 6272,
+          "col_off": 6724,
+          "indices": [],
+          "poly_ids": []
+        },
+        "13": {
+          "row_off": 7844,
+          "col_off": 4278,
+          "indices": [
+            33
+          ],
+          "poly_ids": [
+            34
+          ]
+        }
+      }
+    },
+    "13": {
+      "n_polygons": 17,
+      "n_windows": 9,
+      "windows": {
+        "0": {
+          "row_off": 6207,
+          "col_off": 5424,
+          "indices": [
+            11
+          ],
+          "poly_ids": [
+            12
+          ]
+        },
+        "1": {
+          "row_off": 6407,
+          "col_off": 1589,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        },
+        "2": {
+          "row_off": 6882,
+          "col_off": 4604,
+          "indices": [
+            15,
+            16
+          ],
+          "poly_ids": [
+            16,
+            17
+          ]
+        },
+        "3": {
+          "row_off": 6974,
+          "col_off": 3660,
+          "indices": [
+            3
+          ],
+          "poly_ids": [
+            4
+          ]
+        },
+        "4": {
+          "row_off": 7774,
+          "col_off": 6288,
+          "indices": [],
+          "poly_ids": []
+        },
+        "5": {
+          "row_off": 7613,
+          "col_off": 4482,
+          "indices": [
+            10,
+            12,
+            13
+          ],
+          "poly_ids": [
+            11,
+            13,
+            14
+          ]
+        },
+        "6": {
+          "row_off": 7774,
+          "col_off": 5488,
+          "indices": [
+            14
+          ],
+          "poly_ids": [
+            15
+          ]
+        },
+        "7": {
+          "row_off": 7932,
+          "col_off": 1143,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "8": {
+          "row_off": 7174,
+          "col_off": 6288,
+          "indices": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "poly_ids": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      }
+    },
+    "14": {
+      "n_polygons": 7,
+      "n_windows": 3,
+      "windows": {
+        "0": {
+          "row_off": 6615,
+          "col_off": 5563,
+          "indices": [
+            6
+          ],
+          "poly_ids": [
+            7
+          ]
+        },
+        "1": {
+          "row_off": 7443,
+          "col_off": 6198,
+          "indices": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "poly_ids": [
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "2": {
+          "row_off": 7879,
+          "col_off": 5398,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        }
+      }
+    },
+    "15": {
+      "n_polygons": 2,
+      "n_windows": 1,
+      "windows": {
+        "0": {
+          "row_off": 7390,
+          "col_off": 6308,
+          "indices": [
+            0,
+            1
+          ],
+          "poly_ids": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    "16": {
+      "n_polygons": 4,
+      "n_windows": 2,
+      "windows": {
+        "0": {
+          "row_off": 7389,
+          "col_off": 6437,
+          "indices": [
+            0
+          ],
+          "poly_ids": [
+            1
+          ]
+        },
+        "1": {
+          "row_off": 7947,
+          "col_off": 5580,
+          "indices": [
+            1,
+            2,
+            3
+          ],
+          "poly_ids": [
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    "17": {
+      "n_polygons": 12,
+      "n_windows": 7,
+      "windows": {
+        "0": {
+          "row_off": 8194,
+          "col_off": 4907,
+          "indices": [
+            10
+          ],
+          "poly_ids": [
+            11
+          ]
+        },
+        "1": {
+          "row_off": 8296,
+          "col_off": 4210,
+          "indices": [
+            9
+          ],
+          "poly_ids": [
+            10
+          ]
+        },
+        "2": {
+          "row_off": 8483,
+          "col_off": 5875,
+          "indices": [
+            6,
+            7,
+            8
+          ],
+          "poly_ids": [
+            7,
+            8,
+            9
+          ]
+        },
+        "3": {
+          "row_off": 8618,
+          "col_off": 6717,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        },
+        "4": {
+          "row_off": 9162,
+          "col_off": 4548,
+          "indices": [
+            1,
+            2
+          ],
+          "poly_ids": [
+            2,
+            3
+          ]
+        },
+        "5": {
+          "row_off": 9291,
+          "col_off": 6537,
+          "indices": [
+            0,
+            3,
+            4
+          ],
+          "poly_ids": [
+            1,
+            4,
+            5
+          ]
+        },
+        "6": {
+          "row_off": 9266,
+          "col_off": 5206,
+          "indices": [
+            11
+          ],
+          "poly_ids": [
+            12
+          ]
+        }
+      }
+    },
+    "18": {
+      "n_polygons": 5,
+      "n_windows": 5,
+      "windows": {
+        "0": {
+          "row_off": 6368,
+          "col_off": 5253,
+          "indices": [
+            4
+          ],
+          "poly_ids": [
+            5
+          ]
+        },
+        "1": {
+          "row_off": 7561,
+          "col_off": 6102,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        },
+        "2": {
+          "row_off": 7772,
+          "col_off": 5302,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "3": {
+          "row_off": 8372,
+          "col_off": 4882,
+          "indices": [
+            3
+          ],
+          "poly_ids": [
+            4
+          ]
+        },
+        "4": {
+          "row_off": 7772,
+          "col_off": 4502,
+          "indices": [],
+          "poly_ids": []
+        }
+      }
+    },
+    "19": {
+      "n_polygons": 61,
+      "n_windows": 19,
+      "windows": {
+        "0": {
+          "row_off": 6441,
+          "col_off": 6349,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "1": {
+          "row_off": 6463,
+          "col_off": 5323,
+          "indices": [
+            59
+          ],
+          "poly_ids": [
+            60
+          ]
+        },
+        "2": {
+          "row_off": 7981,
+          "col_off": 5562,
+          "indices": [
+            23,
+            24,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "poly_ids": [
+            24,
+            25,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36
+          ]
+        },
+        "3": {
+          "row_off": 7747,
+          "col_off": 7352,
+          "indices": [
+            60
+          ],
+          "poly_ids": [
+            61
+          ]
+        },
+        "4": {
+          "row_off": 8581,
+          "col_off": 4702,
+          "indices": [
+            37
+          ],
+          "poly_ids": [
+            38
+          ]
+        },
+        "5": {
+          "row_off": 8581,
+          "col_off": 6302,
+          "indices": [
+            12,
+            13,
+            15,
+            49
+          ],
+          "poly_ids": [
+            13,
+            14,
+            16,
+            50
+          ]
+        },
+        "6": {
+          "row_off": 8581,
+          "col_off": 5502,
+          "indices": [
+            16,
+            17,
+            18,
+            20,
+            22,
+            25,
+            36,
+            38
+          ],
+          "poly_ids": [
+            17,
+            18,
+            19,
+            21,
+            23,
+            26,
+            37,
+            39
+          ]
+        },
+        "7": {
+          "row_off": 8315,
+          "col_off": 1973,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        },
+        "8": {
+          "row_off": 9201,
+          "col_off": 6483,
+          "indices": [
+            6,
+            44,
+            45,
+            46,
+            47,
+            48
+          ],
+          "poly_ids": [
+            7,
+            45,
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        "9": {
+          "row_off": 9801,
+          "col_off": 4883,
+          "indices": [
+            7
+          ],
+          "poly_ids": [
+            8
+          ]
+        },
+        "10": {
+          "row_off": 8876,
+          "col_off": 4250,
+          "indices": [
+            39
+          ],
+          "poly_ids": [
+            40
+          ]
+        },
+        "11": {
+          "row_off": 8937,
+          "col_off": 1786,
+          "indices": [
+            3,
+            4
+          ],
+          "poly_ids": [
+            4,
+            5
+          ]
+        },
+        "12": {
+          "row_off": 9201,
+          "col_off": 5683,
+          "indices": [],
+          "poly_ids": []
+        },
+        "13": {
+          "row_off": 9201,
+          "col_off": 4883,
+          "indices": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "poly_ids": [
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "14": {
+          "row_off": 9966,
+          "col_off": 1486,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        },
+        "15": {
+          "row_off": 8581,
+          "col_off": 7102,
+          "indices": [
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56
+          ],
+          "poly_ids": [
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57
+          ]
+        },
+        "16": {
+          "row_off": 7911,
+          "col_off": 4762,
+          "indices": [
+            40,
+            41,
+            42,
+            43
+          ],
+          "poly_ids": [
+            41,
+            42,
+            43,
+            44
+          ]
+        },
+        "17": {
+          "row_off": 7659,
+          "col_off": 6483,
+          "indices": [
+            57,
+            58
+          ],
+          "poly_ids": [
+            58,
+            59
+          ]
+        },
+        "18": {
+          "row_off": 9801,
+          "col_off": 5683,
+          "indices": [],
+          "poly_ids": []
+        }
+      }
+    },
+    "20": {
+      "n_polygons": 16,
+      "n_windows": 6,
+      "windows": {
+        "0": {
+          "row_off": 6619,
+          "col_off": 5550,
+          "indices": [
+            4,
+            5,
+            6
+          ],
+          "poly_ids": [
+            5,
+            6,
+            7
+          ]
+        },
+        "1": {
+          "row_off": 6840,
+          "col_off": 6851,
+          "indices": [
+            15
+          ],
+          "poly_ids": [
+            16
+          ]
+        },
+        "2": {
+          "row_off": 7249,
+          "col_off": 6358,
+          "indices": [
+            0,
+            8,
+            9,
+            10
+          ],
+          "poly_ids": [
+            1,
+            9,
+            10,
+            11
+          ]
+        },
+        "3": {
+          "row_off": 8038,
+          "col_off": 5361,
+          "indices": [
+            11,
+            12,
+            13,
+            14
+          ],
+          "poly_ids": [
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "4": {
+          "row_off": 7249,
+          "col_off": 5558,
+          "indices": [
+            7
+          ],
+          "poly_ids": [
+            8
+          ]
+        },
+        "5": {
+          "row_off": 6182,
+          "col_off": 5355,
+          "indices": [
+            1,
+            2,
+            3
+          ],
+          "poly_ids": [
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    "21": {
+      "n_polygons": 48,
+      "n_windows": 18,
+      "windows": {
+        "0": {
+          "row_off": 7389,
+          "col_off": 3481,
+          "indices": [
+            40
+          ],
+          "poly_ids": [
+            41
+          ]
+        },
+        "1": {
+          "row_off": 8072,
+          "col_off": 4718,
+          "indices": [
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            45
+          ],
+          "poly_ids": [
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            46
+          ]
+        },
+        "2": {
+          "row_off": 7638,
+          "col_off": 6346,
+          "indices": [
+            46
+          ],
+          "poly_ids": [
+            47
+          ]
+        },
+        "3": {
+          "row_off": 8291,
+          "col_off": 5518,
+          "indices": [
+            20,
+            22,
+            23,
+            24,
+            25,
+            44,
+            47
+          ],
+          "poly_ids": [
+            21,
+            23,
+            24,
+            25,
+            26,
+            45,
+            48
+          ]
+        },
+        "4": {
+          "row_off": 8338,
+          "col_off": 3762,
+          "indices": [
+            1,
+            33,
+            34,
+            35,
+            36,
+            38,
+            39
+          ],
+          "poly_ids": [
+            2,
+            34,
+            35,
+            36,
+            37,
+            39,
+            40
+          ]
+        },
+        "5": {
+          "row_off": 8188,
+          "col_off": 2672,
+          "indices": [
+            2,
+            3,
+            4
+          ],
+          "poly_ids": [
+            3,
+            4,
+            5
+          ]
+        },
+        "6": {
+          "row_off": 8423,
+          "col_off": 1788,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        },
+        "7": {
+          "row_off": 8891,
+          "col_off": 5518,
+          "indices": [
+            41
+          ],
+          "poly_ids": [
+            42
+          ]
+        },
+        "8": {
+          "row_off": 8672,
+          "col_off": 4718,
+          "indices": [
+            37
+          ],
+          "poly_ids": [
+            38
+          ]
+        },
+        "9": {
+          "row_off": 8891,
+          "col_off": 6318,
+          "indices": [
+            10,
+            11,
+            12,
+            13,
+            19
+          ],
+          "poly_ids": [
+            11,
+            12,
+            13,
+            14,
+            20
+          ]
+        },
+        "10": {
+          "row_off": 9023,
+          "col_off": 2339,
+          "indices": [
+            7
+          ],
+          "poly_ids": [
+            8
+          ]
+        },
+        "11": {
+          "row_off": 9491,
+          "col_off": 5625,
+          "indices": [],
+          "poly_ids": []
+        },
+        "12": {
+          "row_off": 9872,
+          "col_off": 4398,
+          "indices": [],
+          "poly_ids": []
+        },
+        "13": {
+          "row_off": 9491,
+          "col_off": 6444,
+          "indices": [
+            15,
+            16,
+            17
+          ],
+          "poly_ids": [
+            16,
+            17,
+            18
+          ]
+        },
+        "14": {
+          "row_off": 9922,
+          "col_off": 1479,
+          "indices": [
+            6
+          ],
+          "poly_ids": [
+            7
+          ]
+        },
+        "15": {
+          "row_off": 8972,
+          "col_off": 3918,
+          "indices": [],
+          "poly_ids": []
+        },
+        "16": {
+          "row_off": 9272,
+          "col_off": 4718,
+          "indices": [
+            43
+          ],
+          "poly_ids": [
+            44
+          ]
+        },
+        "17": {
+          "row_off": 8891,
+          "col_off": 7118,
+          "indices": [
+            18
+          ],
+          "poly_ids": [
+            19
+          ]
+        }
+      }
+    },
+    "22": {
+      "n_polygons": 7,
+      "n_windows": 6,
+      "windows": {
+        "0": {
+          "row_off": 6312,
+          "col_off": 5268,
+          "indices": [
+            3,
+            4,
+            5
+          ],
+          "poly_ids": [
+            4,
+            5,
+            6
+          ]
+        },
+        "1": {
+          "row_off": 6435,
+          "col_off": 1617,
+          "indices": [
+            2
+          ],
+          "poly_ids": [
+            3
+          ]
+        },
+        "2": {
+          "row_off": 7428,
+          "col_off": 5631,
+          "indices": [],
+          "poly_ids": []
+        },
+        "3": {
+          "row_off": 7645,
+          "col_off": 4783,
+          "indices": [
+            6
+          ],
+          "poly_ids": [
+            7
+          ]
+        },
+        "4": {
+          "row_off": 7911,
+          "col_off": 1113,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "5": {
+          "row_off": 7428,
+          "col_off": 6431,
+          "indices": [],
+          "poly_ids": []
+        }
+      }
+    },
+    "23": {
+      "n_polygons": 14,
+      "n_windows": 11,
+      "windows": {
+        "0": {
+          "row_off": 6271,
+          "col_off": 5281,
+          "indices": [
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "poly_ids": [
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        "1": {
+          "row_off": 6608,
+          "col_off": 1424,
+          "indices": [
+            3,
+            4
+          ],
+          "poly_ids": [
+            4,
+            5
+          ]
+        },
+        "2": {
+          "row_off": 6973,
+          "col_off": 4481,
+          "indices": [],
+          "poly_ids": []
+        },
+        "3": {
+          "row_off": 7882,
+          "col_off": 5330,
+          "indices": [],
+          "poly_ids": []
+        },
+        "4": {
+          "row_off": 8155,
+          "col_off": 4014,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "5": {
+          "row_off": 7605,
+          "col_off": 6130,
+          "indices": [],
+          "poly_ids": []
+        },
+        "6": {
+          "row_off": 6871,
+          "col_off": 5281,
+          "indices": [],
+          "poly_ids": []
+        },
+        "7": {
+          "row_off": 7833,
+          "col_off": 1086,
+          "indices": [
+            5
+          ],
+          "poly_ids": [
+            6
+          ]
+        },
+        "8": {
+          "row_off": 7256,
+          "col_off": 3681,
+          "indices": [],
+          "poly_ids": []
+        },
+        "9": {
+          "row_off": 7705,
+          "col_off": 4560,
+          "indices": [
+            2,
+            13
+          ],
+          "poly_ids": [
+            3,
+            14
+          ]
+        },
+        "10": {
+          "row_off": 6656,
+          "col_off": 3681,
+          "indices": [
+            7
+          ],
+          "poly_ids": [
+            8
+          ]
+        }
+      }
+    },
+    "25": {
+      "n_polygons": 4,
+      "n_windows": 3,
+      "windows": {
+        "0": {
+          "row_off": 6523,
+          "col_off": 5628,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "1": {
+          "row_off": 6711,
+          "col_off": 6771,
+          "indices": [
+            2,
+            3
+          ],
+          "poly_ids": [
+            3,
+            4
+          ]
+        },
+        "2": {
+          "row_off": 7311,
+          "col_off": 6246,
+          "indices": [
+            0
+          ],
+          "poly_ids": [
+            1
+          ]
+        }
+      }
+    },
+    "26": {
+      "n_polygons": 5,
+      "n_windows": 3,
+      "windows": {
+        "0": {
+          "row_off": 8423,
+          "col_off": 2048,
+          "indices": [
+            1
+          ],
+          "poly_ids": [
+            2
+          ]
+        },
+        "1": {
+          "row_off": 8718,
+          "col_off": 5982,
+          "indices": [
+            2,
+            3,
+            4
+          ],
+          "poly_ids": [
+            3,
+            4,
+            5
+          ]
+        },
+        "2": {
+          "row_off": 9938,
+          "col_off": 1572,
+          "indices": [
+            0
+          ],
+          "poly_ids": [
+            1
+          ]
+        }
+      }
+    }
+  }
+}

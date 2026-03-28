@@ -106,10 +106,6 @@ def get_feat_stat(gdf_img_mpolys, gdf_poly, dict_ret, tiff_file, plot=False, dir
     # ax3.imshow(masked.mask[0, :, :], cmap='Greys'); plt.set_title("Inv Mask")
     # plt.show()
 
-    if plot:
-        FPlot.plot_for_DS(tiff_file, masked_bg, masked_fg,
-                          gdf_poly, gdf_all_inside_bbox, dir_img=dir_img)
-
     if not masked_fg.mask.all():
         dict_ret["BG_STD"] = np.ma.std(masked_fg)
         dict_ret["BG_VAR"] = np.ma.var(masked_fg)

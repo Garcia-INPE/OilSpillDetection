@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="IMG_04_MPOLY_SP00141GXS1" id="IMG_04_MPOLY_SP00141GXS1">
+	<SimpleField name="index" type="string"></SimpleField>
+	<SimpleField name="Id" type="string"></SimpleField>
+	<SimpleField name="ID_POLY" type="string"></SimpleField>
+	<SimpleField name="DATE" type="string"></SimpleField>
+	<SimpleField name="TIME_ACQ" type="string"></SimpleField>
+	<SimpleField name="IMG_NUMBER" type="string"></SimpleField>
+	<SimpleField name="SATELITE" type="string"></SimpleField>
+	<SimpleField name="BEAM_MODE" type="string"></SimpleField>
+	<SimpleField name="CLASSE" type="string"></SimpleField>
+	<SimpleField name="SUBCLASSE" type="string"></SimpleField>
+	<SimpleField name="AREA_KM" type="float"></SimpleField>
+	<SimpleField name="PERIM_KM" type="float"></SimpleField>
+</Schema>
+<Folder><name>IMG_04_MPOLY_SP00141GXS1</name>
+  <Placemark id="IMG_04_MPOLY_SP00141GXS1.1">
+	<name>49</name>
+	<description>4</description>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#IMG_04_MPOLY_SP00141GXS1">
+		<SimpleData name="index">0</SimpleData>
+		<SimpleData name="ID_POLY">00 16 09</SimpleData>
+		<SimpleData name="TIME_ACQ">SENTINEL-1</SimpleData>
+		<SimpleData name="IMG_NUMBER">0</SimpleData>
+		<SimpleData name="SATELITE">OIL SPILL</SimpleData>
+		<SimpleData name="BEAM_MODE">UNIDENTIFIED TARGET</SimpleData>
+		<SimpleData name="CLASSE">0.0315147521252</SimpleData>
+		<SimpleData name="SUBCLASSE">0.967791710721</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-92.06828931,19.36815798 -92.0686486437477,19.3681579858108 -92.0686486437477,19.3683376488676 -92.0688283068045,19.3683376488676 -92.0688283068045,19.3686969749813 -92.0686486437477,19.3686969749813 -92.0686486437477,19.3692359641518 -92.0684689806909,19.3692359641518 -92.0684689806909,19.369954616379 -92.0682893176341,19.3699546163791 -92.0682893176341,19.3701342794359 -92.0672113392931,19.3701342794359 -92.0672113392931,19.3699546163791 -92.0666723501227,19.3699546163791 -92.0666723501227,19.3697749533222 -92.0664926870658,19.3697749533222 -92.0664926870658,19.3694156272086 -92.0666723501227,19.3694156272086 -92.0666723501227,19.3692359641518 -92.0668520131795,19.3692359641518 -92.0668520131795,19.3690563010949 -92.0670316762363,19.3690563010949 -92.0670316762363,19.3686969749813 -92.0672113392931,19.3686969749813 -92.0675706654068,19.3686969749813 -92.0675706654068,19.3688766380381 -92.0679299915204,19.3688766380381 -92.0679299915204,19.3686969749813 -92.0681096545773,19.3686969749813 -92.0681096545773,19.3683376488676 -92.0682893176341,19.3683376488676 -92.06828931,19.36815798</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

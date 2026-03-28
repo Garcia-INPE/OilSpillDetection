@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="IMG_19_MPOLY_SP00342GXS1" id="IMG_19_MPOLY_SP00342GXS1">
+	<SimpleField name="index" type="string"></SimpleField>
+	<SimpleField name="Id" type="string"></SimpleField>
+	<SimpleField name="ID_POLY" type="string"></SimpleField>
+	<SimpleField name="DATE" type="string"></SimpleField>
+	<SimpleField name="TIME_ACQ" type="string"></SimpleField>
+	<SimpleField name="IMG_NUMBER" type="string"></SimpleField>
+	<SimpleField name="SATELITE" type="string"></SimpleField>
+	<SimpleField name="BEAM_MODE" type="string"></SimpleField>
+	<SimpleField name="CLASSE" type="string"></SimpleField>
+	<SimpleField name="SUBCLASSE" type="string"></SimpleField>
+	<SimpleField name="AREA_KM" type="float"></SimpleField>
+	<SimpleField name="PERIM_KM" type="float"></SimpleField>
+</Schema>
+<Folder><name>IMG_19_MPOLY_SP00342GXS1</name>
+  <Placemark id="IMG_19_MPOLY_SP00342GXS1.1">
+	<name>279</name>
+	<description>19</description>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#IMG_19_MPOLY_SP00342GXS1">
+		<SimpleData name="index">0</SimpleData>
+		<SimpleData name="ID_POLY">00 15 15</SimpleData>
+		<SimpleData name="TIME_ACQ">SENTINEL-1</SimpleData>
+		<SimpleData name="IMG_NUMBER">0</SimpleData>
+		<SimpleData name="SATELITE">OIL SPILL</SimpleData>
+		<SimpleData name="BEAM_MODE">UNIDENTIFIED TARGET</SimpleData>
+		<SimpleData name="CLASSE">0.0419899822085</SimpleData>
+		<SimpleData name="SUBCLASSE">1.00515798157</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-92.09510192,19.4835697 -92.0954612555019,19.4835697085333 -92.0954612555019,19.4837493715901 -92.0961799077292,19.4837493715901 -92.0961799077292,19.4839290346469 -92.0965392338428,19.4839290346469 -92.0965392338428,19.4837493715901 -92.0970782230133,19.4837493715901 -92.0970782230133,19.4839290346469 -92.0972578860701,19.4839290346469 -92.0972578860701,19.484827349931 -92.0970782230133,19.484827349931 -92.0970782230133,19.4850070129879 -92.0968985599565,19.4850070129879 -92.0967188968996,19.4850070129879 -92.0967188968996,19.4851866760447 -92.0965392338428,19.4851866760447 -92.0965392338428,19.4853663391015 -92.096359570786,19.4853663391015 -92.096359570786,19.4855460021583 -92.0960002446723,19.4855460021583 -92.0960002446723,19.4853663391015 -92.0958205816155,19.4853663391015 -92.0958205816155,19.4851866760447 -92.0947426032746,19.4851866760447 -92.0947426032746,19.4839290346469 -92.0949222663314,19.4839290346469 -92.0949222663314,19.4837493715901 -92.0951019293882,19.4837493715901 -92.09510192,19.4835697</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

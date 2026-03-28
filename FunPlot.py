@@ -10,7 +10,7 @@ dir_img = "./datain"
 # dir_img="./dataout/img"
 
 
-def plot_for_DS(tiff_file, masked_bg, masked_fg, gdf_poly, gdf_all_inside_bbox, dir_img="./"):
+def gen_jpg_for_ds(tiff_file, masked_bg, masked_fg, gdf_poly, gdf_all_inside_bbox, dir_img="./"):
     """
     # GDFs to plot:
     # . masked_bg: values inside polygon are the original (from TIFF), outside are masked (0, False)
@@ -39,11 +39,7 @@ def plot_for_DS(tiff_file, masked_bg, masked_fg, gdf_poly, gdf_all_inside_bbox, 
     # i0 = gdf_all_inside_bbox.plot(ax=axs[0])  # , color="grayscale")
     # i0 = gdf_poly.plot(ax=axs[0])  # , color="grayscale")
 
-    # Clip the TIFF file according to the polygon bbox
-    Fun.clip_raster_with_gdf_v1(tiff_file, gdf_poly)
-
     # Plot the masked_fg array in greyscale
-
     i01 = axs[0].imshow(tiff_file.read(1))
     axs[0].set_title("Original")
     # fig.colorbar(i01, ax=axs[0, 1])
@@ -51,21 +47,19 @@ def plot_for_DS(tiff_file, masked_bg, masked_fg, gdf_poly, gdf_all_inside_bbox, 
     col_rgb = (0, 0, 0)
     col_1d = 0
 
-    if tuple(gdf_poly[["CLASSE", "SUBCLASSE"]].iloc[0]) == ("OIL SPILL", "IDENTIFIED TARGET"):
+    # CLASSE            RGB Name    RGB Values      1D Labels
+    # -------------------------------------------------------
+    # SEA SURFACE       Black       (0, 0, 0)           0
+    # OIL SPILL         Cyan        (0, 255, 255)       1
+    # SEEPAGE SLICK     Red         (255, 0, 0)         2
+    # LAND (*)          Green       (0, 153, 0)         4
+
+    if gdf_poly["CLASSE"].iloc[0] == "OIL SPILL":
         col_rgb = (0, 255, 255)  # Cyan
         col_1d = 1
-    elif tuple(gdf_poly[["CLASSE", "SUBCLASSE"]].iloc[0]) == ("OIL SPILL", "UNIDENTIFIED TARGET"):
-        col_rgb = (255, 0, 255)  # Magenta
-        col_1d = 6
-    elif tuple(gdf_poly[["CLASSE", "SUBCLASSE"]].iloc[0]) == ("SEEPAGE SLICK", "CANTAREL"):
-        col_rgb = (255, 0, 0)  # Red
+    elif gdf_poly["CLASSE"].iloc[0] == "SEEPAGE SLICK":
+        col_rgb = (255, 0, 0)    # Red
         col_1d = 2
-    elif tuple(gdf_poly[["CLASSE", "SUBCLASSE"]].iloc[0]) == ("SEEPAGE SLICK", "CLUSTER SEEPAGE"):
-        col_rgb = (255, 225, 25)  # Yellow
-        col_1d = 5
-    elif tuple(gdf_poly[["CLASSE", "SUBCLASSE"]].iloc[0]) == ("SEEPAGE SLICK", "ORPHAN SEEPAGE"):
-        col_rgb = (255, 165, 0)  # Orange
-        col_1d = 7
 
     i1 = axs[1].imshow(masked_bg[0, :, :])
     axs[1].set_title("RGB Masked")
@@ -86,5 +80,4 @@ def plot_for_DS(tiff_file, masked_bg, masked_fg, gdf_poly, gdf_all_inside_bbox, 
     fname_img = f".{os.sep}datain{os.sep}IMG_{gdf_poly.Id.iloc[0]}_MPOLY_{gdf_poly.index[0]}.jpg"
     plt.savefig(fname_img)
     plt.close()
-    a = 1
     # print(fname_img)

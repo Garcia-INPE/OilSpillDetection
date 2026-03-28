@@ -1,11 +1,12 @@
 # Create a CSV file containing a list of Kaggle datasets with their metadata based on the txt file
-# /home/jrmgarcia/ProjDocs/OilSpill/src/datain/DS_OIL_Kaggle.txt
+# <project_root>/src/datain/DS_OIL_Kaggle.txt
 
 import os
 
-os.chdir("/home/jrmgarcia/ProjDocs/OilSpill/src")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.getcwd()
+os.chdir(SCRIPT_DIR)
 
-fname_txt = "./datain/DS_OIL_Kaggle.txt"
+fname_txt = os.path.join("datain", "DS_OIL_Kaggle.txt")
 encoding = "utf-8"
 
 # Read the txt file
@@ -20,7 +21,7 @@ txt = [line for line in txt if not (
 txt = [line.replace("\n", "") for line in txt]
 
 # Create a CSV file from the txt list considering that each DS is reported in 4 rows
-fname_csv = "./dataout/DS_OIL_Kaggle_List.csv"
+fname_csv = os.path.join("dataout", "DS_OIL_Kaggle_List.csv")
 with open(fname_csv, 'w', encoding=encoding) as f_csv:
     f_csv.write(
         "SOURCE,NAME,AUTHOR,PAPER,UPLOADED,UP_YS,USAB,FILES,SIZE,DOWNS,DOWNS_Y,NBS,VOTES,RELEV,REASON\n")

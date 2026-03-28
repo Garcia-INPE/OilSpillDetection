@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="IMG_21_MPOLY_SP00391GXS1" id="IMG_21_MPOLY_SP00391GXS1">
+	<SimpleField name="index" type="string"></SimpleField>
+	<SimpleField name="Id" type="string"></SimpleField>
+	<SimpleField name="ID_POLY" type="string"></SimpleField>
+	<SimpleField name="DATE" type="string"></SimpleField>
+	<SimpleField name="TIME_ACQ" type="string"></SimpleField>
+	<SimpleField name="IMG_NUMBER" type="string"></SimpleField>
+	<SimpleField name="SATELITE" type="string"></SimpleField>
+	<SimpleField name="BEAM_MODE" type="string"></SimpleField>
+	<SimpleField name="CLASSE" type="string"></SimpleField>
+	<SimpleField name="SUBCLASSE" type="string"></SimpleField>
+	<SimpleField name="AREA_KM" type="float"></SimpleField>
+	<SimpleField name="PERIM_KM" type="float"></SimpleField>
+</Schema>
+<Folder><name>IMG_21_MPOLY_SP00391GXS1</name>
+  <Placemark id="IMG_21_MPOLY_SP00391GXS1.1">
+	<name>337</name>
+	<description>21</description>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#IMG_21_MPOLY_SP00391GXS1">
+		<SimpleData name="index">0</SimpleData>
+		<SimpleData name="ID_POLY">00 15 16</SimpleData>
+		<SimpleData name="TIME_ACQ">SENTINEL-1</SimpleData>
+		<SimpleData name="IMG_NUMBER">0</SimpleData>
+		<SimpleData name="SATELITE">OIL SPILL</SimpleData>
+		<SimpleData name="BEAM_MODE">IDENTIFIED TARGET</SimpleData>
+		<SimpleData name="CLASSE">0.0269609258299</SimpleData>
+		<SimpleData name="SUBCLASSE">0.887324883997</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-92.35368834,19.66523385 -92.3542273377494,19.6652338570513 -92.3542273377494,19.6663118353923 -92.3540476746925,19.6663118353923 -92.3540476746925,19.6666711615059 -92.3538680116357,19.6666711615059 -92.3538680116357,19.6668508245627 -92.3536883485789,19.6668508245627 -92.3535086855221,19.6668508245627 -92.3535086855221,19.6670304876196 -92.3527900332948,19.6670304876196 -92.3527900332948,19.6668508245627 -92.3518917180106,19.6668508245627 -92.3518917180106,19.6664914984491 -92.3520713810675,19.6664914984491 -92.3522510441243,19.6664914984491 -92.3522510441243,19.6663118353923 -92.3524307071811,19.6663118353923 -92.3524307071811,19.6661321723354 -92.3526103702379,19.6661321723355 -92.3526103702379,19.6659525092786 -92.3527900332948,19.6659525092786 -92.3533290224652,19.6659525092786 -92.3533290224652,19.6657728462218 -92.3535086855221,19.6657728462218 -92.3535086855221,19.6654135201082 -92.3536883485789,19.6654135201082 -92.35368834,19.66523385</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>
