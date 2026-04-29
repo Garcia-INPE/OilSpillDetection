@@ -1,0 +1,5 @@
+bits,split,rf_n_estimators,rf_criterion,rf_max_depth,rf_min_samples_split,rf_min_samples_leaf,rf_max_features,rf_bootstrap,rf_class_weight,rf_random_state,rf_n_jobs,rows,n_features,accuracy,precision_macro,recall_macro,f1_macro
+8bit,val,300,gini,None,2,1,sqrt,True,balanced,42,-1,102,35,0.9215686274509803,0.7579948141745894,0.8566308243727598,0.7962037962037962
+8bit,test,300,gini,None,2,1,sqrt,True,balanced,42,-1,53,35,0.8867924528301887,0.7992424242424242,0.7992424242424242,0.7992424242424242
+16bit,val,300,gini,None,2,1,sqrt,True,balanced,42,-1,102,35,0.9215686274509803,0.7579948141745894,0.8566308243727598,0.7962037962037962
+16bit,test,300,gini,None,2,1,sqrt,True,balanced,42,-1,53,35,0.7547169811320755,0.4982269503546099,0.4987373737373737,0.4952380952380952

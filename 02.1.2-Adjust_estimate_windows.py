@@ -4,9 +4,9 @@
 Manual window editing toolbox for a single image.
 
 This script is intentionally stateful through JSON updates:
-- It reads window positions from dataout/02.1-DS_by_manual_windows/800x600_windows/1/Created_windows.json (source,
+- It reads window positions from dataout/02.1-DS_by_manual_windows/800x600_windows/1 - Preprocessed/Created_windows.json (source,
   read-only) as a starting point.
-- All adjustments are saved to a separate dataout/02.1-DS_by_manual_windows/800x600_windows/2/Adjusted_windows.json so
+- All adjustments are saved to a separate dataout/02.1-DS_by_manual_windows/800x600_windows/2 - Adjusted/Adjusted_windows.json so
   the 02.1.1 output is never modified.
 - Every move operation can automatically re-plot the image for quick feedback.
 
@@ -129,7 +129,7 @@ def _default_json_in_path(width, height):
         "dataout",
         "02.1-DS_by_manual_windows",
         f"{width}x{height}_windows",
-        "1",
+        "1 - Preprocessed",
         "Created_windows.json",
     )
 
@@ -148,7 +148,7 @@ def _default_json_path(width, height):
         "dataout",
         "02.1-DS_by_manual_windows",
         f"{width}x{height}_windows",
-        "2",
+        "2 - Adjusted",
         "Adjusted_windows.json",
     )
 
@@ -167,7 +167,7 @@ def _default_out_dir(width, height):
         "dataout",
         "02.1-DS_by_manual_windows",
         f"{width}x{height}_windows",
-        "2",
+        "2 - Adjusted",
     )
 
 

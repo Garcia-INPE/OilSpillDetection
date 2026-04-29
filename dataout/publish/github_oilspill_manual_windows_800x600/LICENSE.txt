@@ -1,0 +1,4 @@
+LICENSE PLACEHOLDER
+
+Replace this file with the final dataset license text before publication.
+Suggested starter for this package metadata is CC BY 4.0, but use only after project approval.

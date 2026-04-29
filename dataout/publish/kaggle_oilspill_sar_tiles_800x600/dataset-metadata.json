@@ -1,0 +1,18 @@
+{
+  "title": "Oil Spill SAR Segmentation Tiles (800x600)",
+  "id": "<kaggle-username>/oil-spill-sar-segmentation-tiles-800x600",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0"
+    }
+  ],
+  "keywords": [
+    "oil spill",
+    "remote sensing",
+    "sentinel-1",
+    "segmentation",
+    "sar"
+  ],
+  "description": "Publication-ready SAR tile dataset for oil spill semantic segmentation. Includes RGB tiles, pixel masks, raster/vector support files, and aligned 8-bit/16-bit feature statistics files.",
+  "subtitle": "SAR tiles (800x600) with masks, vectors, features, splits, and checksums"
+}

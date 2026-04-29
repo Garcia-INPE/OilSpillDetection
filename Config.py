@@ -7,7 +7,7 @@ import glob
 import geopandas as gpd
 
 HOME = expanduser("~")
-BITS = 16  # 8 or 16
+BITS = 8  # 8 or 16
 
 # Define input paths and files
 DIR_IN = os.path.join(HOME, "ProjData", "Oil_Spill", "Cantarell_Beisl")

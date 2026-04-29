@@ -1,0 +1,4 @@
+class_index_1c,class_name,mask_rgb_hex,mask_rgb_name,description
+0,SEA,#000000,black,Background sea pixels (non-polygon area)
+1,OIL SPILL,#00FFFF,cyan,Oil spill polygon pixels
+2,SEEPAGE SLICK,#FF0000,red,Seepage slick polygon pixels

@@ -1,0 +1,9 @@
+# YOLO segmentation dataset definition (to be used after label conversion)
+path: .
+train: yolo_seg/train/images
+val: yolo_seg/valid/images
+test: yolo_seg/test/images
+
+names:
+  0: OIL_SPILL
+  1: SEEPAGE_SLICK

@@ -2,7 +2,7 @@
 """Build the dataset from manually validated fixed-size windows.
 
 This script reads window positions from
-dataout/02.1-DS_by_manual_windows/800x600_windows/2/Adjusted_windows.json (produced by
+dataout/02.1-DS_by_manual_windows/800x600_windows/2 - Adjusted/Adjusted_windows.json (produced by
 02.1.2-Adjust_estimate_windows.py) and uses them to generate the cropped
 imagery, labels, vectors and CSV rows.
 """
@@ -46,12 +46,12 @@ SIZE_WINDOWS_DIR = os.path.join(
 )
 MANUAL_WINDOWS_JSON = os.path.join(
     SIZE_WINDOWS_DIR,
-    "2",
+    "2 - Adjusted",
     "Adjusted_windows.json",
 )
 _MANUAL_WINDOWS_JSON_FALLBACK = os.path.join(
     SIZE_WINDOWS_DIR,
-    "1",
+    "1 - Preprocessed",
     "Created_windows.json",
 )
 
@@ -84,7 +84,7 @@ DIR_OUT = os.path.join(
     "dataout",
     "02.1-DS_by_manual_windows",
     f"{TARGET_W}x{TARGET_H}_windows",
-    "3",
+    "3 - Ok",
 )
 OUTPUT_DIRS = Fun.build_output_dirs(DIR_OUT, Cfg.BITS)
 

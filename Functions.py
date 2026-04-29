@@ -732,17 +732,17 @@ def save_gdf_as_shapefile(output_dir_shp=None):
 
     dir_out_shp = output_dir_shp if output_dir_shp is not None else Cfg.DIR_OUT_SHP
 
-    fname_shp = f"{dir_out_shp}{os.sep}All_Oil_Spill_Vectors.shp"
+    fname_shp = f"{dir_out_shp}{os.sep}All_Vectors.shp"
     if os.path.exists(fname_shp):
         os.remove(fname_shp)
     VETORES_TO_SAVE.to_file(fname_shp, driver='ESRI Shapefile')
 
     # After zipping all make a final zip file with the .zip extension
     # and delete the zip files with the base name
-    final_zip_path = f'{dir_out_shp}{os.sep}Individual_Oil_Spills.zip'
+    final_zip_path = f'{dir_out_shp}{os.sep}Individual_Vectors.zip'
     with zipfile.ZipFile(final_zip_path, 'w') as final_zip:
         for file in os.listdir(dir_out_shp):
-            if file.endswith('.zip') and file != 'Individual_Oil_Spills.zip':
+            if file.endswith('.zip') and file != 'Individual_Vectors.zip':
                 final_zip.write(os.path.join(dir_out_shp, file), arcname=file)
                 os.remove(os.path.join(dir_out_shp, file))
     

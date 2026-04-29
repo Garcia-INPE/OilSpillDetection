@@ -1,0 +1,9 @@
+GitHub Release Checklist
+
+[ ] Confirm final license text in LICENSE.txt
+[ ] Confirm DATASET_CARD.md reflects final counts and metadata
+[ ] Verify checksums: sha256sum -c checksums.sha256
+[ ] Verify split manifests and paths
+[ ] Create Git tag (example: v0.1.0)
+[ ] Publish GitHub Release with short notes
+[ ] If needed, attach zip/tar.gz dataset asset in release

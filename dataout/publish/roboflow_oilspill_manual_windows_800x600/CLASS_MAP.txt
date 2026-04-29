@@ -1,0 +1,5 @@
+Class map for conversion/export:
+0 -> OIL SPILL
+1 -> SEEPAGE SLICK
+
+Use this map consistently for YOLO and COCO exports.

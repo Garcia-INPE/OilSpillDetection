@@ -1,0 +1,10 @@
+{
+  "info": {"description": "Oil Spill Manual Windows 800x600", "version": "0.1.0"},
+  "licenses": [],
+  "images": [],
+  "annotations": [],
+  "categories": [
+    {"id": 0, "name": "OIL SPILL"},
+    {"id": 1, "name": "SEEPAGE SLICK"}
+  ]
+}

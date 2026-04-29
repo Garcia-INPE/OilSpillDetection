@@ -8,7 +8,7 @@ This script does two things only:
 2. Save one PNG preview per TIFF showing polygons and the estimated windows.
 
 The estimated windows are written to
-dataout/02.1-DS_by_manual_windows/800x600_windows/1/Created_windows.json and are consumed later by
+dataout/02.1-DS_by_manual_windows/800x600_windows/1 - Preprocessed/Created_windows.json and are consumed later by
 02.1.3-Build_DS_from_manual_windows.py.
 """
 
@@ -35,8 +35,8 @@ SIZE_WINDOWS_DIR = os.path.join(
     "02.1-DS_by_manual_windows",
     f"{TARGET_W}x{TARGET_H}_windows",
 )
-JSON_PATH = os.path.join(SIZE_WINDOWS_DIR, "1", "Created_windows.json")
-DIR_OUT = os.path.join(SIZE_WINDOWS_DIR, "1")
+JSON_PATH = os.path.join(SIZE_WINDOWS_DIR, "1 - Preprocessed", "Created_windows.json")
+DIR_OUT = os.path.join(SIZE_WINDOWS_DIR, "1 - Preprocessed")
 CLEAN_OUTPUT_DIR = True
 
 os.makedirs(DIR_OUT, exist_ok=True)
